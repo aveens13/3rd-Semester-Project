@@ -1,4 +1,3 @@
-const proxy = require("express-http-proxy");
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
@@ -9,8 +8,6 @@ const PROD = process.env.PROD;
 
 if (PROD) {
   app.use(express.static(__dirname + "/vite-svelte/dist"));
-} else {
-  app.use("/", proxy("localhost:5173"));
 }
 
 app.get("/api/contact/", (req, res) => {
@@ -20,7 +17,6 @@ app.get("/api/contact/", (req, res) => {
   });
 });
 
-//listening
 app.listen(PORT, "0.0.0.0", 1, (req, res) => {
   console.log(`Listening to the server on http://localhost:${PORT}`);
 });
