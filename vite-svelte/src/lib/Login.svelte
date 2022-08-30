@@ -53,8 +53,16 @@
   h1 {
     font-weight: bold;
     margin: 0;
+    /* font-family: "Montserrat", sans-serif; */
   }
-
+  .sign-in-container h1 {
+    padding-bottom: 50px;
+    font-family: "Montserrat", sans-serif;
+  }
+  .sign-up-container h1 {
+    padding-bottom: 50px;
+    font-family: "Montserrat", sans-serif;
+  }
   p {
     font-size: 14px;
     font-weight: 100;
@@ -112,8 +120,8 @@
   }
   .buttonsub {
     border-radius: 20px;
-    border: 1px solid #ff6f69;
-    background-color: #ff6f69;
+    border: 1px solid #6d8baa;
+    background-color: #6d8baa;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -182,10 +190,25 @@
     transform: translateX(-100%);
   }
 
-  .overlay {
+  /* .overlay {
     background: #ff7575;
     background: -webkit-linear-gradient(to right, #ff6f69, #ff6f69);
     background: linear-gradient(to right, #ff6f69, #ff6f69);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+  } */
+  .overlay {
+    background: #6888a7;
+    background: -webkit-linear-gradient(to right, #6d8baa, #6d8baa);
+    background: linear-gradient(to right, #6d8baa, #6d8baa);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -212,7 +235,7 @@
     text-align: center;
     top: 0;
     height: 100%;
-    width: 50%;
+    width: 40%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
   }
