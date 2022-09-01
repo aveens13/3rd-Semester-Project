@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server-dev": "nodemon index.js",
-    "vite-dev": "cd vite-svelte && npm run dev",
+    "vite-dev": "cd vite-svelte && npm run dev -- --host",
     "dev": "concurrently --kill-others \"npm run vite-dev\" \"npm run server-dev\""
   },
   "repository": {
