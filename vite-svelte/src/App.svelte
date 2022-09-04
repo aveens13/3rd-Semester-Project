@@ -1,6 +1,7 @@
 <script>
   import svelteLogo from "./assets/svelte.svg";
-  import Counter from "./lib/Counter.svelte";
+  import Admin from "./lib/Admin.svelte";
+  import Counter from "./lib/Admin.svelte";
   import Login from "./lib/Login.svelte";
   import UserLogin from "./lib/UserLogin.svelte";
   import Waiting from "./lib/Waiting.svelte";
@@ -11,9 +12,11 @@
 <main>
   {#if state == "waiting"}
     <Waiting />
-  {:else if state == "logged in"}
+  {:else if state == "user"}
     <UserLogin />
+  {:else if state == "admin"}
+    <Admin />
   {:else}
-    <Login />
+    <Login bind:state />
   {/if}
 </main>

@@ -1,5 +1,30 @@
 <script>
+  import Admin from "./Admin.svelte";
+
   let changed;
+  let data = null;
+  export let state;
+  async function submitHandle(event) {
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const plainFormdata = Object.fromEntries(formData.entries());
+    const formDataJsonString = JSON.stringify(plainFormdata);
+    const response = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+      credentials: "include",
+      body: formDataJsonString,
+    });
+    if (response.ok) {
+      const e = await response.json();
+      console.log(e);
+      state = "admin";
+    }
+  }
+  console.log(data);
 </script>
 
 <div
@@ -7,7 +32,11 @@
   id="container"
 >
   <div class="form-container sign-up-container">
-    <form method="POST" class="form-menu" action="api/admin-login">
+    <form
+      method="POST"
+      class="form-menu"
+      on:submit|preventDefault={submitHandle}
+    >
       <h1>Login as Admin</h1>
       <input type="text" name="adminUsername" placeholder="Username" />
       <input type="password" name="adminPassword" placeholder="Password" />
@@ -94,7 +123,10 @@
 
   input {
     background-color: #eee;
+    color: #333;
     border: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
@@ -103,15 +135,17 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    position: relative;
+    position: absolute;
     overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 768px;
     margin-top: 30px;
     margin-bottom: 30px;
     max-width: 100%;
     min-height: 480px;
   }
-
   .form-container {
     position: absolute;
     top: 0;
@@ -189,22 +223,6 @@
   .container.right-panel-active .overlay-container {
     transform: translateX(-100%);
   }
-
-  /* .overlay {
-    background: #ff7575;
-    background: -webkit-linear-gradient(to right, #ff6f69, #ff6f69);
-    background: linear-gradient(to right, #ff6f69, #ff6f69);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0 0;
-    color: #ffffff;
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out;
-  } */
   .overlay {
     background: #6888a7;
     background: -webkit-linear-gradient(to right, #6d8baa, #6d8baa);
