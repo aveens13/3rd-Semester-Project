@@ -1,6 +1,9 @@
 <script>
-  import Admin from "./Admin.svelte";
-
+  import Snackbar, { Label, Actions } from "@smui/snackbar";
+  import IconButton from "@smui/icon-button";
+  import Button from "@smui/button";
+  let snackbarError;
+  let snackbarSuccess;
   let changed;
   let data = null;
   export let state;
@@ -23,9 +26,17 @@
       console.log(e);
       state = "admin";
     }
+    snackbarError.open();
   }
   console.log(data);
 </script>
+
+<Snackbar bind:this={snackbarError} class="demo-error">
+  <Label>Cannot Login. Check your username or Password</Label>
+  <Actions>
+    <IconButton class="material-icons" title="Dismiss">close</IconButton>
+  </Actions>
+</Snackbar>
 
 <div
   class={changed == "admin" ? "container right-panel-active" : "container"}

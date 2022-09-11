@@ -36,7 +36,7 @@ app.post("/api/admin-login", async (req, res) => {
         result: "success",
       });
     }
-    res.status(401).send({
+    return res.status(401).send({
       result: "failed",
     });
   }
