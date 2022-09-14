@@ -1,5 +1,12 @@
 <script>
-  async function logoutButton() {}
+  export let state;
+  export let click;
+  function clickedRegister() {
+    click = "register";
+  }
+  async function logoutButton() {
+    state = "n";
+  }
 </script>
 
 <navbar>
@@ -12,8 +19,8 @@
       <li class="nav-item">
         <span>Pluscare Admin Pannel</span>
       </li>
-      <li class="nav-item">
-        <span>Create a user</span>
+      <li class="nav-item" on:click={clickedRegister}>
+        <span>Register a patient</span>
       </li>
       <li class="nav-item">
         <span>See tickets</span>
@@ -87,40 +94,40 @@
     display: none;
   }
   /* @media (max-width: 925px) {
-    .nav-item:first-child {
-      font-size: 30px;
-      padding-left: 50px;
+      .nav-item:first-child {
+        font-size: 30px;
+        padding-left: 50px;
+      }
+      .navlist span {
+        font-size: 16px;
+      }
     }
-    .navlist span {
-      font-size: 16px;
-    }
-  }
-  @media (max-width: 858px) {
-    .checkbtn {
-      display: block;
-    }
-    .navlist {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #2c3e50;
-      top: 80px;
-      left: 0;
-      text-align: center;
-    }
-    .navlist {
-      display: block;
-    }
-    .nav-item {
-      padding: 10px;
-    }
-    .navlist span {
-      font-size: 20px;
-    }
-    span:hover,
-    span:active {
-      background: none;
-      color: #6d8baa;
-    }
-  } */
+    @media (max-width: 858px) {
+      .checkbtn {
+        display: block;
+      }
+      .navlist {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top: 80px;
+        left: 0;
+        text-align: center;
+      }
+      .navlist {
+        display: block;
+      }
+      .nav-item {
+        padding: 10px;
+      }
+      .navlist span {
+        font-size: 20px;
+      }
+      span:hover,
+      span:active {
+        background: none;
+        color: #6d8baa;
+      }
+    } */
 </style>

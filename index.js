@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
+const patient = require("./patientSchema");
 const cookieParser = require("cookie-parser");
 dotenv.config();
 const PORT = process.env.PORT;
@@ -11,6 +13,20 @@ const PROD = process.env.PROD;
 if (PROD) {
   app.use(express.static(__dirname + "/vite-svelte/dist"));
 }
+
+//database connection
+const dbURI = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@cluster0.ajkefxa.mongodb.net/pluscare?retryWrites=true&w=majority`;
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    console.log(
+      `Mongodb connection established with username ${process.env.DBUSERNAME}`
+    )
+  )
+  .catch((err) => console.log(err));
 
 //middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +44,6 @@ app.post("/api/signin", (req, res) => {
 app.post("/api/admin-login", async (req, res) => {
   const { adminUsername, adminPassword } = req.body;
   console.log(adminUsername, adminPassword);
-  console.log(process.env.ADMINPASSWORD);
   if (adminUsername == process.env.ADMINUSERNAME) {
     if (await bcrypt.compare(adminPassword, process.env.ADMINPASSWORD)) {
       console.log("Admin Login Requested and Passed");

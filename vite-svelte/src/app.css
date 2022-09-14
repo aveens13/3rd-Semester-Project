@@ -19,7 +19,7 @@
 button:hover{
   cursor: pointer;
 }
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: rgba(0, 0, 0, 0.87);
     background-color: #242424;
@@ -30,4 +30,4 @@ button:hover{
   button {
     background-color: #f9f9f9;
   }
-}
+} */
