@@ -67,6 +67,8 @@ app.get("/api/contact/", (req, res) => {
   });
 });
 
+app.post("/api/register-patient", (req, res) => {});
+
 app.listen(PORT, "0.0.0.0", 1, (req, res) => {
   console.log(`Listening to the server on http://localhost:${PORT}`);
 });

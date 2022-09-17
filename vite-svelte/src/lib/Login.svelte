@@ -72,16 +72,16 @@
           provided
         </p>
         <button class="ghost buttonsub" on:click={() => (changed = "signin")}
-          >Sign In as User</button
+          >Sign In as Patient</button
         >
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>Hello, Admin!</h1>
+        <h1>Medical Staff</h1>
         <p>Enter the admin credentials of the site!</p>
         <button
           class="ghost buttonsub"
           id="signUp"
-          on:click={() => (changed = "admin")}>Log in as Admin</button
+          on:click={() => (changed = "admin")}>Log in as Medical Staff</button
         >
       </div>
     </div>

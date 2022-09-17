@@ -4,6 +4,12 @@
   function clickedRegister() {
     click = "register";
   }
+  function clickedsee() {
+    click = "seeTickets";
+  }
+  function clickedCreate() {
+    click = "createTicket";
+  }
   async function logoutButton() {
     state = "n";
   }
@@ -17,15 +23,15 @@
     </label>
     <ul class="navlist">
       <li class="nav-item">
-        <span>Pluscare Admin Pannel</span>
+        <span>Pluscare</span>
       </li>
       <li class="nav-item" on:click={clickedRegister}>
         <span>Register a patient</span>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" on:click={clickedsee}>
         <span>See tickets</span>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" on:click={clickedCreate}>
         <span>Create an ticket</span>
       </li>
       <li class="nav-item">
@@ -44,6 +50,8 @@
     padding: 1rem 0;
     display: flex;
     font-family: "Montserrat", sans-serif;
+    font-size: 16 px;
+    font-weight: 500;
     justify-content: flex-end;
     align-items: center;
   }
