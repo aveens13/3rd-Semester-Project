@@ -97,6 +97,7 @@ app.post("/api/register-patient", (req, res) => {
   ];
   return res.status(200).send({
     success: true,
+    mail: `${req.body.patientEmail}`,
   });
 });
 

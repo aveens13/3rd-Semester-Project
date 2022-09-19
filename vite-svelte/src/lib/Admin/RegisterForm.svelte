@@ -28,7 +28,9 @@
           buttons: ["Ok", "Mail me"],
         }).then((willMail) => {
           if (willMail) {
-            console.log("The username and password will be mailed");
+            swal({
+              text: `Email sent successfully to ${result.mail}`,
+            });
           } else {
             console.log("Thank you for registering");
           }
