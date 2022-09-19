@@ -67,7 +67,38 @@ app.get("/api/contact/", (req, res) => {
   });
 });
 
-app.post("/api/register-patient", (req, res) => {});
+app.post("/api/register-patient", (req, res) => {
+  const name = [
+    {
+      use: "official",
+      given: [`${req.body.firstName}`],
+      family: `${req.body.lastName}`,
+    },
+  ];
+  const gender = `${req.body.gender}`;
+  const birthDate = `${req.body.birthDate}`;
+  const telecom = [
+    {
+      value: `${req.body.patientNumber}`,
+      use: "mobile",
+      system: "phone",
+    },
+    {
+      value: `${req.body.patientEmail}`,
+      system: "email",
+    },
+  ];
+  const address = [
+    {
+      line: [`${req.body.streetName}`],
+      city: `${req.body.cityName}`,
+      state: `${req.body.stateName}`,
+    },
+  ];
+  return res.status(200).send({
+    success: true,
+  });
+});
 
 app.listen(PORT, "0.0.0.0", 1, (req, res) => {
   console.log(`Listening to the server on http://localhost:${PORT}`);

@@ -1,4 +1,5 @@
 <script>
+  import swal from "sweetalert";
   async function onSubmit(event) {
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -13,6 +14,28 @@
       credentials: "include",
       body: formDatainJSON,
     });
+    if (response.ok) {
+      const result = await response.json();
+      swal({
+        title: "Registration form",
+        text: "You Successfully registered a patient.",
+        icon: "success",
+      }).then((value) => {
+        swal({
+          title: "Patient's Username and Password",
+          text: `Username: ${result.success}`,
+          icon: "info",
+          buttons: ["Ok", "Mail me"],
+        }).then((willMail) => {
+          if (willMail) {
+            console.log("The username and password will be mailed");
+          } else {
+            console.log("Thank you for registering");
+          }
+        });
+      });
+      console.log(result);
+    }
   }
 </script>
 
