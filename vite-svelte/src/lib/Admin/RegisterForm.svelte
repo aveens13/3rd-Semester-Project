@@ -29,7 +29,9 @@
         }).then((willMail) => {
           if (willMail) {
             swal({
+              title: "Mail Sent",
               text: `Email sent successfully to ${result.mail}`,
+              icon: "success",
             });
           } else {
             console.log("Thank you for registering");
