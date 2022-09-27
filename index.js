@@ -1,10 +1,15 @@
 const express = require("express");
 const app = express();
+const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
+const uuid = require("uuid");
+const { credentials } = require("./config");
 const patient = require("./patientSchema");
+const patientlogin = require("./patientLoginSchema");
+const ses = require("./sessions");
 const cookieParser = require("cookie-parser");
 dotenv.config();
 const PORT = process.env.PORT;
@@ -34,11 +39,58 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //server api requests
+app.get("/api/is-logged-in", (req, res) => {
+  const session = req.cookies.session;
+  if (session) {
+    ses.findOne({ sessionKey: session }).then((data) => {
+      const userId = data.userId;
+      patientlogin.findById(userId).then((result) => {
+        console.log(result);
+        patient.findById(result.patientId).then((response) => {
+          console.log(response);
+          return res.status(200).send({
+            response,
+          });
+        });
+      });
+    });
+  } else {
+    return res.status(403).send({
+      err: "No data available",
+    });
+  }
+});
 
 app.post("/api/signin", (req, res) => {
-  res.send({
-    result: "Success",
-  });
+  const { myEmail, myPassword } = req.body;
+  //console.log(myEmail, myPassword);
+  try {
+    patientlogin.findOne({ email: myEmail }).then(async (result) => {
+      if (await bcrypt.compare(myPassword, result.password)) {
+        const sessionId = uuid.v4();
+        res.cookie("session", sessionId, {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+          httpOnly: true,
+        });
+        const Session = await ses.create({
+          sessionKey: sessionId,
+          userId: result.id,
+        });
+        console.log(Session);
+        patient.findById(result.patientId).then((resp) => {
+          return res.status(200).send({
+            response: resp,
+          });
+        });
+      } else {
+        return res.status(400).send({
+          result: "failed",
+        });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/api/admin-login", async (req, res) => {
@@ -67,7 +119,11 @@ app.get("/api/contact/", (req, res) => {
   });
 });
 
-app.post("/api/register-patient", (req, res) => {
+app.post("/api/register-patient", async (req, res) => {
+  let userEmail;
+  const userPassword =
+    req.body.firstName.toLowerCase() + `@${req.body.patientNumber}`;
+  // const uniqueUserid = uuid.v4();
   const name = [
     {
       use: "official",
@@ -95,9 +151,39 @@ app.post("/api/register-patient", (req, res) => {
       state: `${req.body.stateName}`,
     },
   ];
+  let userId;
+  try {
+    const Patient = await patient.create({
+      name,
+      gender,
+      birthDate,
+      telecom,
+      address,
+    });
+    userId = Patient.id;
+    console.log(Patient.id);
+  } catch (error) {
+    console.log(error);
+  }
+  if (telecom[1].value == "") {
+    userEmail = telecom[0].value;
+  } else {
+    userEmail = telecom[1].value;
+  }
+  try {
+    const Patientlogin = await patientlogin.create({
+      email: userEmail,
+      password: userPassword,
+      patientId: userId,
+    });
+  } catch (err) {
+    console.log(err);
+  }
   return res.status(200).send({
     success: true,
     mail: `${req.body.patientEmail}`,
+    uid: userEmail,
+    userPassword,
   });
 });
 

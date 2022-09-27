@@ -20,10 +20,10 @@
         title: "Registration form",
         text: "You Successfully registered a patient.",
         icon: "success",
-      }).then((value) => {
+      }).then(() => {
         swal({
           title: "Patient's Username and Password",
-          text: `Username: ${result.success}`,
+          text: `Username: ${result.uid} Password: ${result.userPassword}`,
           icon: "info",
           buttons: ["Ok", "Mail me"],
         }).then((willMail) => {

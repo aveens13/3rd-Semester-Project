@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const { isEmail } = require("validator");
-const bcrypt = require("bcrypt");
 const patientSchema = new mongoose.Schema({
   name: {
     type: Array,
@@ -14,6 +12,7 @@ const patientSchema = new mongoose.Schema({
   },
   telecom: {
     type: Array,
+    unique: true,
   },
   address: {
     type: Array,

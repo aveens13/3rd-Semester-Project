@@ -7,6 +7,7 @@
   let changed;
   let data = null;
   export let state;
+  export let response;
   async function submitHandle(event) {
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -27,6 +28,29 @@
       state = "admin";
     }
     snackbarError.open();
+  }
+  async function submitSignin(event) {
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const plainFormdata = Object.fromEntries(formData.entries());
+    const formDataJsonString = JSON.stringify(plainFormdata);
+    const resp = await fetch("api/signin", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+      credentials: "include",
+      body: formDataJsonString,
+    });
+    if (resp.ok) {
+      const e = await resp.json();
+      state = "patient";
+      response = e;
+      console.log(response);
+    } else {
+      snackbarError.open();
+    }
   }
   console.log(data);
 </script>
@@ -55,7 +79,11 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form method="POST" action="api/signin">
+    <form
+      method="POST"
+      action="api/signin"
+      on:submit|preventDefault={submitSignin}
+    >
       <h1>Sign in</h1>
       <input type="email" placeholder="Email" name="myEmail" />
       <input type="password" placeholder="Password" name="myPassword" />
