@@ -66,30 +66,39 @@ app.post("/api/signin", (req, res) => {
   //console.log(myEmail, myPassword);
   try {
     patientlogin.findOne({ email: myEmail }).then(async (result) => {
-      if (await bcrypt.compare(myPassword, result.password)) {
-        const sessionId = uuid.v4();
-        res.cookie("session", sessionId, {
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-          httpOnly: true,
-        });
-        const Session = await ses.create({
-          sessionKey: sessionId,
-          userId: result.id,
-        });
-        console.log(Session);
-        patient.findById(result.patientId).then((resp) => {
-          return res.status(200).send({
-            response: resp,
+      if (result != null) {
+        if (await bcrypt.compare(myPassword, result.password)) {
+          const sessionId = uuid.v4();
+          res.cookie("session", sessionId, {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: true,
           });
-        });
+          const Session = await ses.create({
+            sessionKey: sessionId,
+            userId: result.id,
+          });
+          console.log(Session);
+          patient.findById(result.patientId).then((resp) => {
+            return res.status(200).send({
+              response: resp,
+            });
+          });
+        } else {
+          return res.status(400).send({
+            result: "failed",
+          });
+        }
       } else {
         return res.status(400).send({
-          result: "failed",
+          error: "email not found",
         });
       }
     });
   } catch (error) {
     console.log(error);
+    return res.status(400).send({
+      result: "No such email",
+    });
   }
 });
 
