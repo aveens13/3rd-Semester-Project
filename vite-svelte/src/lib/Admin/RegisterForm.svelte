@@ -17,28 +17,24 @@
     if (response.ok) {
       const result = await response.json();
       swal({
-        title: "Registration form",
-        text: "You Successfully registered a patient.",
+        title: "Patient's Username and Password",
+        text: `Username: ${result.uid} Password: ${result.userPassword}`,
         icon: "success",
       }).then(() => {
         swal({
-          title: "Patient's Username and Password",
-          text: `Username: ${result.uid} Password: ${result.userPassword}`,
-          icon: "info",
-          buttons: ["Ok", "Mail me"],
-        }).then((willMail) => {
-          if (willMail) {
-            swal({
-              title: "Mail Sent",
-              text: `Email sent successfully to ${result.mail}`,
-              icon: "success",
-            });
-          } else {
-            console.log("Thank you for registering");
-          }
+          title: "Mail Sent",
+          text: `Email sent successfully to ${result.mail}`,
+          icon: "success",
         });
       });
+
       console.log(result);
+    } else {
+      swal({
+        title: "Registration Failed",
+        text: "Cannot register the patient with the given details",
+        icon: "error",
+      });
     }
   }
 </script>

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const { credentials } = require("./config");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -187,7 +188,38 @@ app.post("/api/register-patient", async (req, res) => {
     console.log(Patientlogin);
   } catch (err) {
     console.log(err);
+    return res.status(400).send({
+      success: false,
+    });
   }
+  const msg = {
+    from: "Pluscare",
+    to: `${req.body.patientEmail}`,
+    subject: "Pluscare Registration",
+    text:
+      "Username: " +
+      userEmail +
+      " Password: " +
+      `${userPassword}` +
+      " Thankyou",
+  };
+  nodemailer
+    .createTransport({
+      service: "gmail",
+      auth: {
+        user: credentials.gmail.user,
+        pass: credentials.gmail.pass,
+      },
+      port: 465,
+      host: "smtp.gmail.com",
+    })
+    .sendMail(msg, (err) => {
+      if (err) {
+        return console.log("Error ", err);
+      } else {
+        return console.log("Email Sent");
+      }
+    });
   return res.status(200).send({
     success: true,
     mail: `${req.body.patientEmail}`,

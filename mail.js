@@ -7,7 +7,6 @@ const msg = {
   subject: "Pluscare Registration",
   text: "Registered Successfully" + "Thankyou",
 };
-console.log(credentials.gmail.user, credentials.gmail.pass);
 nodemailer
   .createTransport({
     service: "gmail",

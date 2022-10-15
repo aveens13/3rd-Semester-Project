@@ -52,7 +52,4 @@
     justify-content: center;
     align-items: center;
   }
-  .heading {
-    color: #319ac7;
-  }
 </style>
