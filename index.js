@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const uuid = require("uuid");
-const { credentials } = require("./config");
 const patient = require("./patientSchema");
 const patientlogin = require("./patientLoginSchema");
 const ses = require("./sessions");
@@ -185,6 +184,7 @@ app.post("/api/register-patient", async (req, res) => {
       password: userPassword,
       patientId: userId,
     });
+    console.log(Patientlogin);
   } catch (err) {
     console.log(err);
   }

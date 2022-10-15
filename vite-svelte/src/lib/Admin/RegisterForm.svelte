@@ -299,4 +299,21 @@
   /* .buttonHolder {
     text-align: center;
   } */
+  @media (max-width: 750px) {
+    .container form {
+      overflow-y: scroll;
+    }
+    .container form::-webkit-scrollbar {
+      display: none;
+    }
+    form .fields .input-field {
+      width: calc(100% / 2 - 30px);
+    }
+  }
+
+  @media (max-width: 550px) {
+    form .fields .input-field {
+      width: 100%;
+    }
+  }
 </style>
