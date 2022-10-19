@@ -173,6 +173,7 @@
     max-height: 100vh;
     display: flex;
     align-items: center;
+    padding-left: 250px;
     justify-content: center;
     font-family: "Poppins", sans-serif;
   }

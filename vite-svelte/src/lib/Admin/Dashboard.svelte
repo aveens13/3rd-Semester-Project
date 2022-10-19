@@ -1,6 +1,6 @@
 <main>
   <div class="heading">
-    <h2>Hello! CreateTicket is still under development</h2>
+    <h2>Hello! Dashboard is still under development</h2>
   </div>
 </main>
 

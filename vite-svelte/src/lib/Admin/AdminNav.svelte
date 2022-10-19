@@ -1,6 +1,9 @@
 <script>
   export let state;
   export let click;
+  function clickedHome() {
+    click = "home";
+  }
   function clickedRegister() {
     click = "register";
   }
@@ -22,7 +25,7 @@
       <i class="fa fa-bars" />
     </label>
     <ul class="navlist">
-      <li class="nav-item">
+      <li class="nav-item" on:click={clickedHome}>
         <span>Pluscare</span>
       </li>
       <li class="nav-item" on:click={clickedRegister}>
