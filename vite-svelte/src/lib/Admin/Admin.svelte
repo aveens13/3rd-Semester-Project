@@ -1,6 +1,6 @@
 <script>
   export let state;
-  let click = "none";
+  let click = "home";
   import AdminNav from "./AdminNav.svelte";
   import CreateTicket from "./createTicket.svelte";
   import Dashboard from "./Dashboard.svelte";

@@ -39,6 +39,34 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //server api requests
+// app.get('/api/patient-data',(req,res)=>{
+//   try {
+//     patient.find({}).count().then((data)=>{
+//       console.log(data);
+//     })
+//   } catch (error) {
+//     res.status(404).send({
+//       status: 'Unable to fetch data',
+//     })
+//   }
+// })
+app.get("/api/patients/", async (req, res) => {
+  try {
+    const numberofPatients = await patient.find({}).count();
+    patient.find({}).then((data) => {
+      console.log(data);
+      res.status(200).send({
+        data,
+        numberofPatients,
+      });
+    });
+  } catch (err) {
+    res.status(404).send({
+      status: "Unable to fetch data",
+    });
+  }
+});
+
 app.get("/api/is-logged-in", (req, res) => {
   const session = req.cookies.session;
   if (session) {

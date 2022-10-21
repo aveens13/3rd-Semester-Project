@@ -46,6 +46,11 @@
             ><span class="las la-receipt" /><span>Create Tickets</span></span
           >
         </li>
+        <li on:click={logoutButton}>
+          <span class="logout">
+            <i class="bx bx-log-out" id="log_out" />
+          </span>
+        </li>
       </ul>
     </div>
   </div>
@@ -65,37 +70,6 @@
         </div>
       </div>
     </header>
-    <!-- <main>
-      <div class="cards">
-        <div class="card-single">
-          <div>
-            <h1>41</h1>
-            <span>Patients</span>
-          </div>
-          <div>
-            <span class="las la-users" />
-          </div>
-        </div>
-        <div class="card-single">
-          <div>
-            <h1>41</h1>
-            <span>Tickets</span>
-          </div>
-          <div>
-            <span class="las la-clipboard" />
-          </div>
-        </div>
-        <div class="card-single">
-          <div>
-            <h1>41</h1>
-            <span>Remaining</span>
-          </div>
-          <div>
-            <span class="las la-clipboard" />
-          </div>
-        </div>
-      </div>
-    </main> -->
   </div>
 </body>
 
@@ -156,20 +130,33 @@
     font-size: 1.5rem;
     padding-right: 1rem;
   }
+  #log_out {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+  }
   .main-content {
     margin-left: 250px;
   }
   header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
   }
   header h2 {
     color: #222;
   }
   header label span {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     padding-right: 1rem;
   }
   .user-wrapper {
