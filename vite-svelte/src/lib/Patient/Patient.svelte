@@ -29,7 +29,7 @@
     <Tickets bind:active bind:patientState />
   </Modal>
 {:else if patientState == "generalticket"}
-  <GeneralTicket name={responseObject} bind:active />
+  <GeneralTicket bind:active />
 {:else if patientState == "covidTicket"}
   <CovidTicket />
 {:else if patientState == "diabetesTicket"}
