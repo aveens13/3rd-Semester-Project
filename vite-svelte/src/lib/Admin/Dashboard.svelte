@@ -29,7 +29,7 @@
           <h1>{patients}</h1>
         </div>
       </div>
-      <small class="text-muted">Last 24 hours</small>
+      <small class="text-muted">registered on the pluscare</small>
     </div>
     <div class="tickets_rem">
       <i class="las la-ticket-alt" />
@@ -39,7 +39,7 @@
           <h1>{ticktetsRem}</h1>
         </div>
       </div>
-      <small class="text-muted">Last 24 hours</small>
+      <small class="text-muted">tickets</small>
     </div>
     <div class="completed">
       <i class="las la-ticket-alt" />
@@ -49,7 +49,7 @@
           <h1>{ticktesDone}</h1>
         </div>
       </div>
-      <small class="text-muted">Last 24 hours</small>
+      <small class="text-muted">tickets</small>
     </div>
   </div>
   <div class="patients-list">
@@ -81,6 +81,20 @@
 </main>
 
 <style>
+  .recent-updates {
+    margin-top: 1rem;
+  }
+  .recent-updates h2 {
+    margin-bottom: 0.8rem;
+  }
+  .recent-updates .updates {
+    background-color: #dce1eb;
+    padding: 1.8rem;
+    border-radius: 2rem;
+  }
+  .text-muted {
+    color: #7d8da1;
+  }
   .warning {
     color: #ffcc00;
   }

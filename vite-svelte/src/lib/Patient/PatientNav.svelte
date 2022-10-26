@@ -1,11 +1,23 @@
 <script>
-  let active = false;
+  export let active;
+  export let state;
+  export let patientState;
   export let responseNav;
+  export let ticketActive;
   let name =
     responseNav.response.name[0].given[0] +
     " " +
     responseNav.response.name[0].family;
   console.log(name);
+  function logoutSession() {
+    fetch("/api/logout").then((result) => {
+      result.json().then((e) => {
+        if (e.status == "logout") {
+          state = "login";
+        }
+      });
+    });
+  }
 </script>
 
 <main>
@@ -18,7 +30,7 @@
       <i class="bx bx-menu" id="btn" on:click={() => (active = !active)} />
     </div>
     <ul class="nav_list">
-      <li>
+      <li on:click={() => (patientState = "dashboard")}>
         <span class="a">
           <i class="bx bx-grid-alt" />
           <span class="links_name">Dashboard</span>
@@ -32,7 +44,10 @@
         </span>
         <span class="tooltip">User</span>
       </li>
-      <li>
+      <li
+        on:click={() => (ticketActive = true)}
+        on:click={() => (patientState = "tickets")}
+      >
         <span class="a">
           <i class="bx bx-message-square-check" />
           <span class="links_name">Tickets</span>
@@ -49,7 +64,7 @@
             <div class="job">Patient</div>
           </div>
         </div>
-        <i class="bx bx-log-out" id="log_out" />
+        <i class="bx bx-log-out" id="log_out" on:click={logoutSession} />
       </div>
     </div>
   </div>
@@ -65,8 +80,8 @@
   }
   main {
     position: relative;
-    min-height: 98vh;
-    width: 100%;
+    /* min-height: 98vh; */
+    /* width: 100%; */
     overflow: hidden;
   }
   .sidebar {

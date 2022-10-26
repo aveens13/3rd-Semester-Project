@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fileupload = require("express-fileupload");
 const { credentials } = require("./config");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
@@ -10,6 +11,7 @@ const uuid = require("uuid");
 const patient = require("./patientSchema");
 const patientlogin = require("./patientLoginSchema");
 const ses = require("./sessions");
+const ticket = require("./ticketSchema");
 const cookieParser = require("cookie-parser");
 dotenv.config();
 const PORT = process.env.PORT;
@@ -37,19 +39,9 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(fileupload());
 
 //server api requests
-// app.get('/api/patient-data',(req,res)=>{
-//   try {
-//     patient.find({}).count().then((data)=>{
-//       console.log(data);
-//     })
-//   } catch (error) {
-//     res.status(404).send({
-//       status: 'Unable to fetch data',
-//     })
-//   }
-// })
 app.get("/api/patients/", async (req, res) => {
   try {
     const numberofPatients = await patient.find({}).count();
@@ -130,6 +122,32 @@ app.post("/api/signin", (req, res) => {
   }
 });
 
+app.get("/api/logout", (req, res) => {
+  res.clearCookie("session");
+  res.send({
+    status: "logout",
+  });
+});
+
+app.post("/api/create", (req, res) => {
+  const session = req.cookies.session;
+  let patientResult;
+  ses.findOne({ sessionKey: session }).then((data) => {
+    const userId = data.userId;
+    patientlogin.findById(userId).then((result) => {
+      patient.findById(result.patientId).then((response) => {
+        console.log(response);
+        patientResult = response;
+        console.log(
+          patientResult.name[0].given[0] + " " + patientResult.name[0].family
+        );
+      });
+    });
+  });
+  console.log(req.files);
+  res.send("okay");
+});
+
 app.post("/api/admin-login", async (req, res) => {
   const { adminUsername, adminPassword } = req.body;
   console.log(adminUsername, adminPassword);
@@ -156,6 +174,124 @@ app.get("/api/contact/", (req, res) => {
   });
 });
 
+app.get("/api/getimage/:picture", async (req, res) => {
+  var filename = req.params.picture;
+  await ticket.findById(filename).then((results) => {
+    res.setHeader("content-type", results.conditionImage.contentType);
+    res.send(results.conditionImage.data);
+  });
+});
+app.get("/api/ticketinfo", async (req, res) => {
+  await ticket.find({}).then((results) => {
+    res.status(200).send(results);
+  });
+});
+app.post("/api/createticket", async (req, res) => {
+  const condition = req.body.condition;
+  const symptom = req.body.symptom;
+  const medication = req.body.medication;
+  const medicationAllergy = req.body.medicationAllergy;
+  const session = req.cookies.session;
+  if (req.files) {
+    var photo = req.files.photo;
+    console.log(req.files.photo);
+    photo.mv(`./${photo.name}`, async (err) => {
+      if (err) throw err;
+    });
+    try {
+      ses.findOne({ sessionKey: session }).then((data) => {
+        const userId = data.userId;
+        patientlogin.findById(userId).then((result) => {
+          patient.findById(result.patientId).then(async (response) => {
+            patientResult = response;
+            console.log(patientResult);
+            await ticket.create({
+              type: "general",
+              createdBy: {
+                firstName: patientResult.name[0].given[0],
+                lastName: patientResult.name[0].family,
+              },
+              condition,
+              symptom,
+              medication: {
+                isTaking: medication,
+                medicineList: req.body.medicine,
+              },
+              medicationAllergy: {
+                hasAllergy: medicationAllergy,
+                allergy: req.body.allergy,
+              },
+              conditionImage: {
+                data: photo.data,
+                contentType: `${photo.mimetype}`,
+              },
+              completed: false,
+              dateCreated: Date.now(),
+            });
+          });
+        });
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(404).send({
+        success: false,
+        message: "Cannot save to the database",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      condition,
+      symptom,
+      medication,
+      medicationAllergy,
+    });
+  } else {
+    try {
+      ses.findOne({ sessionKey: session }).then((data) => {
+        const userId = data.userId;
+        patientlogin.findById(userId).then((result) => {
+          patient.findById(result.patientId).then(async (response) => {
+            patientResult = response;
+            await ticket.create({
+              type: "general",
+              condition,
+              createdBy: {
+                firstName: patientResult.name[0].given[0],
+                lastName: patientResult.name[0].family,
+              },
+              symptom,
+              medication: {
+                isTaking: medication,
+                medicineList: req.body.medicine,
+              },
+              medicationAllergy: {
+                hasAllergy: medicationAllergy,
+                allergy: req.body.allergy,
+              },
+              completed: false,
+              dateCreated: Date.now(),
+            });
+          });
+        });
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(404).send({
+        success: false,
+        message: "Cannot save to the database",
+      });
+    }
+    console.log(condition, symptom, medication, medicationAllergy);
+    return res.status(200).send({
+      success: true,
+      condition,
+      symptom,
+      medication,
+      medicationAllergy,
+    });
+  }
+});
 app.post("/api/register-patient", async (req, res) => {
   let userEmail;
   const userPassword =

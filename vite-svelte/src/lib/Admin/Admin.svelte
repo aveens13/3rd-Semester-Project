@@ -7,6 +7,7 @@
   import Nav from "./Nav.svelte";
   import RegisterForm from "./RegisterForm.svelte";
   import SeeTickets from "./seeTickets.svelte";
+  import Ticketmain from "./Ticketmain.svelte";
 </script>
 
 <Nav bind:state bind:click />
@@ -16,9 +17,11 @@
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
-  <SeeTickets />
+  <SeeTickets bind:click />
 {:else if click == "createTicket"}
   <CreateTicket />
+{:else if click == "ticketopen"}
+  <Ticketmain />
 {:else}
   <!--  -->
 {/if}

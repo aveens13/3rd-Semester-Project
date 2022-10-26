@@ -14,7 +14,17 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+body::-webkit-scrollbar{
+  display: none;
+}
+::-webkit-file-upload-button{
+  color: white;
+  background: #6d8baa;
+  padding: 10px;
+  border: none;
+  border-radius: 1.8rem;
+  outline: none;
+}
 button:hover{
   cursor: pointer;
 }

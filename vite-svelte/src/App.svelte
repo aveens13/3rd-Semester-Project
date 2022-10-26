@@ -29,7 +29,7 @@
   {#if state == "waiting"}
     <Waiting />
   {:else if state == "patient"}
-    <Patient responseObject={response} />
+    <Patient bind:state responseObject={response} />
   {:else if state == "admin"}
     <Admin bind:state />
   {:else}
