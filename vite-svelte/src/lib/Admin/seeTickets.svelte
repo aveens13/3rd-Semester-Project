@@ -40,11 +40,11 @@
             {/if}
           </div>
         </div>
-        {#if patient.conditionImage}
+        <!-- {#if patient.conditionImage}
           <div class="conditionPhoto">
             <img src={`/api/getimage/${patient._id}`} alt="" />
           </div>
-        {/if}
+        {/if} -->
       </div>
     {/each}
   </div>
