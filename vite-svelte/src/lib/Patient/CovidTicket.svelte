@@ -22,7 +22,4 @@
     height: 100px;
     border-radius: 1.8rem;
   }
-  .heading {
-    color: #319ac7;
-  }
 </style>

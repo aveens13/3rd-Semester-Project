@@ -1,6 +1,5 @@
 <script>
   import swal from "sweetalert";
-  export let name;
   export let active;
   async function submitHandler(event) {
     const form = event.currentTarget;
