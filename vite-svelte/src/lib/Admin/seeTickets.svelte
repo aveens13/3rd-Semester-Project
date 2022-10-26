@@ -43,7 +43,7 @@
         {#if patient.conditionImage}
           <div class="conditionPhoto">
             <img
-              src={`http://localhost:5173/api/getimage/${patient._id}`}
+              src={`http://localhost:5000/api/getimage/${patient._id}`}
               alt=""
             />
           </div>
