@@ -42,10 +42,7 @@
         </div>
         {#if patient.conditionImage}
           <div class="conditionPhoto">
-            <img
-              src={`http://localhost:5000/api/getimage/${patient._id}`}
-              alt=""
-            />
+            <img src={`/api/getimage/${patient._id}`} alt="" />
           </div>
         {/if}
       </div>
