@@ -1,23 +1,24 @@
 <script>
   import { each } from "svelte/internal";
+  import { fade, slide, scale } from "svelte/transition";
   export let click;
-  let fhir_var = [];
-  fetch("/api/ticketinfo").then((result) => {
-    if (result.ok) {
-      result.json().then((e) => {
-        console.log(e);
-        fhir_var = e;
-      });
-    } else {
-      fhir_var = null;
-    }
-  });
+  export let fhir_var;
+  // fetch("/api/ticketinfo").then((result) => {
+  //   if (result.ok) {
+  //     result.json().then((e) => {
+  //       console.log(e);
+  //       fhir_var = e;
+  //     });
+  //   } else {
+  //     fhir_var = null;
+  //   }
+  // });
 </script>
 
 <main>
-  <div class="container">
+  <div class="container" in:fade>
     {#each fhir_var as patient}
-      <div class="card">
+      <div class="card" in:slide>
         <div class="info">
           <h1>
             {patient.createdBy.firstName + " " + patient.createdBy.lastName}
@@ -25,7 +26,6 @@
           <p>Created a ticket</p>
           <ul>
             <li>Type: {patient.type}</li>
-            <li>Condition: {patient.condition}</li>
           </ul>
           <div class="links">
             <span class="a" on:click={() => (click = "ticketopen")}

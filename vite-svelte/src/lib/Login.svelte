@@ -1,5 +1,7 @@
 <script>
   import Snackbar, { Label, Actions } from "@smui/snackbar";
+  import { flip } from "svelte/animate";
+  import { fade } from "svelte/transition";
   import IconButton from "@smui/icon-button";
   import Button from "@smui/button";
   let snackbarError;
@@ -65,6 +67,7 @@
 <div
   class={changed == "admin" ? "container right-panel-active" : "container"}
   id="container"
+  in:fade={{ delay: 500 }}
 >
   <div class="form-container sign-up-container">
     <form

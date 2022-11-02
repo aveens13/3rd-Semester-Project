@@ -1,8 +1,9 @@
 <script>
+  import { fade, slide, scale } from "svelte/transition";
   let patients = 0;
-  let ticktetsRem = 0;
   let response = [];
   let ticktesDone = 0;
+  export let ticketsRem;
   fetch("/api/patients").then((result) => {
     if (result.ok) {
       console.log(result);
@@ -16,7 +17,7 @@
   });
 </script>
 
-<main>
+<main in:fade>
   <div class="date">
     <input type="date" name="todayDate" />
   </div>
@@ -26,7 +27,9 @@
       <div class="middle">
         <div class="left">
           <h3>Patients</h3>
-          <h1>{patients}</h1>
+          {#key patients}
+            <h1 in:fade>{patients}</h1>
+          {/key}
         </div>
       </div>
       <small class="text-muted">registered on the pluscare</small>
@@ -36,7 +39,9 @@
       <div class="middle">
         <div class="left">
           <h3>Remaining</h3>
-          <h1>{ticktetsRem}</h1>
+          {#key ticketsRem}
+            <h1 in:fade>{ticketsRem}</h1>
+          {/key}
         </div>
       </div>
       <small class="text-muted">tickets</small>
@@ -67,11 +72,13 @@
       <tbody>
         {#each response as patient}
           <tr>
-            <td>{patient.name[0].given[0] + " " + patient.name[0].family}</td>
-            <td>{patient.telecom[0].value}</td>
-            <td>Pending</td>
-            <td class="warning">Due</td>
-            <td class="primary">Details</td>
+            <td in:slide
+              >{patient.name[0].given[0] + " " + patient.name[0].family}</td
+            >
+            <td in:slide>{patient.telecom[0].value}</td>
+            <td in:slide>Pending</td>
+            <td class="warning" in:slide>Due</td>
+            <td class="primary" in:slide>Details</td>
           </tr>
         {/each}
       </tbody>

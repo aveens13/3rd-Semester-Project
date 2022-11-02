@@ -9,10 +9,10 @@ const ticketSchema = new mongoose.Schema({
     lastName: String,
   },
   condition: {
-    type: String,
+    type: Array,
   },
   symptom: {
-    type: String,
+    type: Array,
   },
   medication: {
     isTaking: String,
@@ -22,6 +22,9 @@ const ticketSchema = new mongoose.Schema({
     oxygenSaturation: Number,
     temperature: Number,
     heartRate: Number,
+    hbaLevel: Number,
+    glucoseFasting: Number,
+    glucoseRandom: Number,
   },
   medicationAllergy: {
     hasAllergy: String,
@@ -36,6 +39,9 @@ const ticketSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: Date,
+  },
+  description: {
+    type: String,
   },
 });
 const ticket = mongoose.model("Ticket", ticketSchema);

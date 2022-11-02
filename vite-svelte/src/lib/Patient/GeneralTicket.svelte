@@ -17,6 +17,14 @@
         icon: "success",
       });
       console.log(result);
+    } else {
+      const result = await response.json();
+      swal({
+        title: "Cannot create a ticket",
+        text: "Please fill up the form",
+        icon: "error",
+      });
+      console.log(result);
     }
   }
 </script>
@@ -29,6 +37,7 @@
       on:submit|preventDefault={submitHandler}
       enctype="multipart/form-data"
     >
+      <input type="hidden" name="type" value="General" />
       <div class="conditions">
         <h4>
           Check the conditions that apply to you:<span class="asterick"

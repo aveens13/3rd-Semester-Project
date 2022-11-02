@@ -1,17 +1,23 @@
 <script>
+  import { fade, slide } from "svelte/transition";
   export let state;
   export let click;
+  export let navStatus;
   function clickedHome() {
     click = "home";
+    navStatus = "Dashboard";
   }
   function clickedRegister() {
     click = "register";
+    navStatus = "Registration";
   }
   function clickedsee() {
     click = "seeTickets";
+    navStatus = "See Tickets";
   }
   function clickedCreate() {
     click = "createTicket";
+    navStatus = "Create Ticket";
   }
   async function logoutButton() {
     state = "n";
@@ -59,7 +65,7 @@
       <div class="header-title">
         <h2>
           <label for="">
-            <span class="las la-bars" /><span>Dashboard</span>
+            <span class="las la-bars" /><span in:fade>{navStatus}</span>
           </label>
         </h2>
       </div>

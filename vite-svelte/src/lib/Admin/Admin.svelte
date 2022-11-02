@@ -1,27 +1,41 @@
 <script>
   export let state;
   let click = "home";
-  import AdminNav from "./AdminNav.svelte";
+  let fhir_var;
+  import Waiting from "../Waiting.svelte";
   import CreateTicket from "./createTicket.svelte";
   import Dashboard from "./Dashboard.svelte";
   import Nav from "./Nav.svelte";
   import RegisterForm from "./RegisterForm.svelte";
   import SeeTickets from "./seeTickets.svelte";
   import Ticketmain from "./Ticketmain.svelte";
+  let noOfTickets = 0;
+  fetch("/api/ticketinfo").then((result) => {
+    if (result.ok) {
+      result.json().then((e) => {
+        console.log(e);
+        fhir_var = e.data;
+        noOfTickets = e.noOfTickets;
+      });
+    } else {
+      fhir_var = null;
+    }
+  });
 </script>
 
-<Nav bind:state bind:click />
+<Nav navStatus="Dashboard" bind:state bind:click />
 <!-- <AdminNav bind:state bind:click /> -->
 {#if click == "home"}
-  <Dashboard />
+  <Dashboard ticketsRem={noOfTickets} />
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
-  <SeeTickets bind:click />
+  <SeeTickets bind:fhir_var bind:click />
 {:else if click == "createTicket"}
   <CreateTicket />
 {:else if click == "ticketopen"}
   <Ticketmain />
-{:else}
+{:else if click == "waiting"}
+  <Waiting />
   <!--  -->
 {/if}

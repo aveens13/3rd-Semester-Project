@@ -182,16 +182,71 @@ app.get("/api/getimage/:picture", async (req, res) => {
   });
 });
 app.get("/api/ticketinfo", async (req, res) => {
+  const noOfTickets = await ticket.find({}).count();
   await ticket.find({}).then((results) => {
-    res.status(200).send(results);
+    res.status(200).send({
+      data: results,
+      noOfTickets,
+    });
   });
 });
 app.post("/api/createticket", async (req, res) => {
-  const condition = req.body.condition;
+  let condition = [];
+  let medication = "";
+  let medicationAllergy = "";
+  let medicineList = "";
+  let allergy = "";
+  let oxygenSaturation = null;
+  let temperature = null;
+  let heartRate = null;
+  let hbaLevel = null;
+  let glucoseFasting = null;
+  let glucoseRandom = null;
+  if (req.body.condition) {
+    condition = req.body.condition;
+  }
+  if (req.body.medication) {
+    medication = req.body.medication;
+  }
+  if (req.body.medicationAllergy) {
+    medicationAllergy = req.body.medicationAllergy;
+  }
+  if (req.body.medicine) {
+    medicineList = req.body.medicine;
+  }
+  if (req.body.allergy) {
+    allergy = req.body.allergy;
+  }
+  if (req.body.oxygen) {
+    oxygenSaturation = req.body.oxygen;
+    temperature = req.body.temperature;
+    heartRate = req.body.heart;
+  }
+  if (req.body.type == "Diabetes") {
+    hbaLevel = req.body.hba;
+    glucoseFasting = req.body.glucoseFasting;
+    glucoseRandom = req.body.glucoseRandom;
+  }
   const symptom = req.body.symptom;
-  const medication = req.body.medication;
-  const medicationAllergy = req.body.medicationAllergy;
+  console.log(symptom);
+  console.log(condition);
+  console.log(medication);
+  console.log(req.body.desc);
   const session = req.cookies.session;
+  let description = "";
+  if (req.body.desc) {
+    description = req.body.desc;
+  }
+  if (symptom == null) {
+    console.log("True its null");
+  } else {
+    console.log("It's not null");
+  }
+  if (symptom == null || req.body.desc == "") {
+    return res.status(406).send({
+      message: "Error Creating this ticket",
+    });
+  }
   if (req.files) {
     var photo = req.files.photo;
     console.log(req.files.photo);
@@ -206,7 +261,7 @@ app.post("/api/createticket", async (req, res) => {
             patientResult = response;
             console.log(patientResult);
             await ticket.create({
-              type: "general",
+              type: req.body.type,
               createdBy: {
                 firstName: patientResult.name[0].given[0],
                 lastName: patientResult.name[0].family,
@@ -215,11 +270,19 @@ app.post("/api/createticket", async (req, res) => {
               symptom,
               medication: {
                 isTaking: medication,
-                medicineList: req.body.medicine,
+                medicineList,
+              },
+              measurements: {
+                oxygenSaturation,
+                temperature,
+                heartRate,
+                hbaLevel,
+                glucoseFasting,
+                glucoseRandom,
               },
               medicationAllergy: {
                 hasAllergy: medicationAllergy,
-                allergy: req.body.allergy,
+                allergy,
               },
               conditionImage: {
                 data: photo.data,
@@ -227,6 +290,7 @@ app.post("/api/createticket", async (req, res) => {
               },
               completed: false,
               dateCreated: Date.now(),
+              description,
             });
           });
         });
@@ -238,7 +302,6 @@ app.post("/api/createticket", async (req, res) => {
         message: "Cannot save to the database",
       });
     }
-
     return res.status(200).send({
       success: true,
       condition,
@@ -254,7 +317,7 @@ app.post("/api/createticket", async (req, res) => {
           patient.findById(result.patientId).then(async (response) => {
             patientResult = response;
             await ticket.create({
-              type: "general",
+              type: req.body.type,
               condition,
               createdBy: {
                 firstName: patientResult.name[0].given[0],
@@ -271,6 +334,7 @@ app.post("/api/createticket", async (req, res) => {
               },
               completed: false,
               dateCreated: Date.now(),
+              description,
             });
           });
         });
@@ -282,13 +346,9 @@ app.post("/api/createticket", async (req, res) => {
         message: "Cannot save to the database",
       });
     }
-    console.log(condition, symptom, medication, medicationAllergy);
     return res.status(200).send({
       success: true,
-      condition,
       symptom,
-      medication,
-      medicationAllergy,
     });
   }
 });

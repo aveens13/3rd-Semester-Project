@@ -10,6 +10,7 @@
   import CovidTicket from "./CovidTicket.svelte";
   import DiabetesTicket from "./DiabetesTicket.svelte";
   import Modal from "../Modals/Modal.svelte";
+  import Payment from "./Payment.svelte";
   export let responseObject;
 </script>
 
@@ -31,7 +32,9 @@
 {:else if patientState == "generalticket"}
   <GeneralTicket bind:active />
 {:else if patientState == "covidTicket"}
-  <CovidTicket />
+  <CovidTicket bind:active />
 {:else if patientState == "diabetesTicket"}
-  <DiabetesTicket />
+  <DiabetesTicket bind:active />
+{:else if patientState == "payment"}
+  <Payment />
 {/if}

@@ -1,5 +1,6 @@
 <script>
   import swal from "sweetalert";
+  import { fade, slide } from "svelte/transition";
   async function onSubmit(event) {
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -40,7 +41,7 @@
 </script>
 
 <main>
-  <div class="container">
+  <div class="container" in:fade>
     <header>Registration</header>
     <form
       method="POST"

@@ -54,6 +54,13 @@
         </span>
         <span class="tooltip">Tickets</span>
       </li>
+      <li on:click={() => (patientState = "payment")}>
+        <span class="a">
+          <i class="bx bx-credit-card" />
+          <span class="links_name">Payment</span>
+        </span>
+        <span class="tooltip">Payment</span>
+      </li>
     </ul>
     <div class="profile_content">
       <div class="profile">
