@@ -1,5 +1,10 @@
 <script>
+  export let click;
+  export let patientDetails;
+  export let fhir_var;
   import { fade, slide, scale } from "svelte/transition";
+  import Waiting from "../Waiting.svelte";
+  import Details from "./Details.svelte";
   let patients = 0;
   let response = [];
   let ticktesDone = 0;
@@ -15,6 +20,10 @@
       response = null;
     }
   });
+  function handleClick(patient) {
+    click = "details";
+    patientDetails = patient;
+  }
 </script>
 
 <main in:fade>
@@ -78,12 +87,13 @@
             <td in:slide>{patient.telecom[0].value}</td>
             <td in:slide>Pending</td>
             <td class="warning" in:slide>Due</td>
-            <td class="primary" in:slide>Details</td>
+            <td class="primary" in:slide on:click={handleClick(patient)}
+              >Details</td
+            >
           </tr>
         {/each}
       </tbody>
     </table>
-    <span>Show all</span>
   </div>
 </main>
 

@@ -1,10 +1,13 @@
 <script>
   export let state;
   let click = "home";
-  let fhir_var;
+  let fhir_var = [];
+  let patientDetails;
+  let patientTicketDetails;
   import Waiting from "../Waiting.svelte";
   import CreateTicket from "./createTicket.svelte";
   import Dashboard from "./Dashboard.svelte";
+  import Details from "./Details.svelte";
   import Nav from "./Nav.svelte";
   import RegisterForm from "./RegisterForm.svelte";
   import SeeTickets from "./seeTickets.svelte";
@@ -26,15 +29,22 @@
 <Nav navStatus="Dashboard" bind:state bind:click />
 <!-- <AdminNav bind:state bind:click /> -->
 {#if click == "home"}
-  <Dashboard ticketsRem={noOfTickets} />
+  <Dashboard
+    ticketsRem={noOfTickets}
+    bind:click
+    bind:patientDetails
+    bind:fhir_var
+  />
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
-  <SeeTickets bind:fhir_var bind:click />
+  <SeeTickets bind:patientTicketDetails bind:fhir_var bind:click />
 {:else if click == "createTicket"}
   <CreateTicket />
 {:else if click == "ticketopen"}
-  <Ticketmain />
+  <Ticketmain {patientTicketDetails} bind:click />
+{:else if click == "details"}
+  <Details user={patientDetails} />
 {:else if click == "waiting"}
   <Waiting />
   <!--  -->

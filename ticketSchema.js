@@ -7,6 +7,7 @@ const ticketSchema = new mongoose.Schema({
   createdBy: {
     firstName: String,
     lastName: String,
+    userID: String,
   },
   condition: {
     type: Array,

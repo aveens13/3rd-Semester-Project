@@ -24,7 +24,7 @@
   }
 </script>
 
-<body>
+<body in:fade>
   <div class="sidebar">
     <div class="sidebar-brand">
       <h2><span>Pluscare</span></h2>
@@ -70,10 +70,7 @@
         </h2>
       </div>
       <div class="user-wrapper">
-        <img src="./admin.png" alt="" />
-        <div>
-          <h4>Admin</h4>
-        </div>
+        <i class="las la-user-nurse" />
       </div>
     </header>
   </div>
@@ -169,7 +166,8 @@
     display: flex;
     align-items: center;
   }
-  .user-wrapper img {
+  .user-wrapper i {
+    font-size: 50px;
     border-radius: 50%;
     margin-right: 1rem;
   }

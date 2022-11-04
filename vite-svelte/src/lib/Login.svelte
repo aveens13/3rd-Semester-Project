@@ -64,60 +64,62 @@
   </Actions>
 </Snackbar>
 
-<div
-  class={changed == "admin" ? "container right-panel-active" : "container"}
-  id="container"
-  in:fade={{ delay: 500 }}
->
-  <div class="form-container sign-up-container">
-    <form
-      method="POST"
-      class="form-menu"
-      on:submit|preventDefault={submitHandle}
-    >
-      <h1>Login as Admin</h1>
-      <input type="text" name="adminUsername" placeholder="Username" />
-      <input type="password" name="adminPassword" placeholder="Password" />
-      <input type="submit" class="buttonsub" value="Login to System" />
-    </form>
-  </div>
-  <div class="form-container sign-in-container">
-    <form
-      method="POST"
-      action="api/signin"
-      on:submit|preventDefault={submitSignin}
-    >
-      <h1>Sign in</h1>
-      <input type="email" placeholder="Email" name="myEmail" />
-      <input type="password" placeholder="Password" name="myPassword" />
-      <a href="/">Forgot your password?</a>
-      <input type="submit" class="buttonsub" value="Signin" />
-    </form>
-  </div>
-  <div class="overlay-container">
-    <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1>Welcome User!</h1>
-        <p>
-          To view your dashbaord please enter the details that the system has
-          provided
-        </p>
-        <button class="ghost buttonsub" on:click={() => (changed = "signin")}
-          >Sign In as Patient</button
-        >
-      </div>
-      <div class="overlay-panel overlay-right">
-        <h1>Medical Staff</h1>
-        <p>Enter the admin credentials of the site!</p>
-        <button
-          class="ghost buttonsub"
-          id="signUp"
-          on:click={() => (changed = "admin")}>Log in as Medical Staff</button
-        >
+<main>
+  <div
+    class={changed == "admin" ? "container right-panel-active" : "container"}
+    id="container"
+    in:fade={{ delay: 500 }}
+  >
+    <div class="form-container sign-up-container">
+      <form
+        method="POST"
+        class="form-menu"
+        on:submit|preventDefault={submitHandle}
+      >
+        <h1>Login as Admin</h1>
+        <input type="text" name="adminUsername" placeholder="Username" />
+        <input type="password" name="adminPassword" placeholder="Password" />
+        <input type="submit" class="buttonsub" value="Login to System" />
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form
+        method="POST"
+        action="api/signin"
+        on:submit|preventDefault={submitSignin}
+      >
+        <h1>Sign in</h1>
+        <input type="email" placeholder="Email" name="myEmail" />
+        <input type="password" placeholder="Password" name="myPassword" />
+        <a href="/">Forgot your password?</a>
+        <input type="submit" class="buttonsub" value="Signin" />
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome User!</h1>
+          <p>
+            To view your dashbaord please enter the details that the system has
+            provided
+          </p>
+          <button class="ghost buttonsub" on:click={() => (changed = "signin")}
+            >Sign In as Patient</button
+          >
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Medical Staff</h1>
+          <p>Enter the admin credentials of the site!</p>
+          <button
+            class="ghost buttonsub"
+            id="signUp"
+            on:click={() => (changed = "admin")}>Log in as Medical Staff</button
+          >
+        </div>
       </div>
     </div>
   </div>
-</div>
+</main>
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");

@@ -48,7 +48,13 @@
           <div class="flex-measurements">
             <div class="measurements">
               <label for="oxygen">Oxygen Saturation</label>
-              <input type="number" id="oxygen" name="oxygen" placeholder="98" />
+              <input
+                type="number"
+                id="oxygen"
+                name="oxygen"
+                placeholder="98"
+                required
+              />
             </div>
             <div class="measurements">
               <label for="temperature">Temperature</label>
@@ -57,6 +63,7 @@
                 id="temperature"
                 name="temperature"
                 placeholder="98"
+                required
               />
             </div>
             <div class="measurements">
@@ -66,6 +73,7 @@
                 id="heart"
                 name="heart"
                 placeholder="60 bpm"
+                required
               />
             </div>
           </div>

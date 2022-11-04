@@ -3,6 +3,7 @@
   import { fade, slide, scale } from "svelte/transition";
   export let click;
   export let fhir_var;
+  export let patientTicketDetails;
   // fetch("/api/ticketinfo").then((result) => {
   //   if (result.ok) {
   //     result.json().then((e) => {
@@ -12,7 +13,11 @@
   //   } else {
   //     fhir_var = null;
   //   }
-  // });
+  //
+  function handleClick(patient) {
+    click = "ticketopen";
+    patientTicketDetails = patient;
+  }
 </script>
 
 <main>
@@ -28,9 +33,7 @@
             <li>Type: {patient.type}</li>
           </ul>
           <div class="links">
-            <span class="a" on:click={() => (click = "ticketopen")}
-              >See Ticket</span
-            >
+            <span class="a" on:click={handleClick(patient)}>See Ticket</span>
             {#if patient.completed}
               <span class="check"><i class="chk las la-check" />Checked</span>
             {:else if !patient.completed}
@@ -134,14 +137,5 @@
   }
   .links .check {
     margin-left: auto;
-  }
-  .conditionPhoto {
-    margin-left: auto;
-    opacity: 90%;
-  }
-  .conditionPhoto img {
-    height: 200px;
-    width: 200px;
-    border-radius: 3rem;
   }
 </style>

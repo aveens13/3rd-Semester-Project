@@ -242,7 +242,7 @@ app.post("/api/createticket", async (req, res) => {
   } else {
     console.log("It's not null");
   }
-  if (symptom == null || req.body.desc == "") {
+  if (symptom == null) {
     return res.status(406).send({
       message: "Error Creating this ticket",
     });
@@ -322,6 +322,7 @@ app.post("/api/createticket", async (req, res) => {
               createdBy: {
                 firstName: patientResult.name[0].given[0],
                 lastName: patientResult.name[0].family,
+                userId: patientResult._id,
               },
               symptom,
               medication: {
