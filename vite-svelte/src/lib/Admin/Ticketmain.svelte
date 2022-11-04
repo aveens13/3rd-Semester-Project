@@ -12,7 +12,7 @@
     setTimeout(() => {
       active = false;
       click = "seeTickets";
-    }, 2900);
+    }, 1500);
   }
 </script>
 
@@ -168,7 +168,7 @@
     background-color: #4070f4;
   }
   .progress.active::before {
-    animation: progress 3s linear forwards;
+    animation: progress 1.5s linear forwards;
   }
 
   @keyframes progress {

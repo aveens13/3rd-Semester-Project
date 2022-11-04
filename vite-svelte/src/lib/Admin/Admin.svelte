@@ -1,10 +1,9 @@
 <script>
   export let state;
   let click = "home";
-  let fhir_var = [];
   let patientDetails;
   let patientTicketDetails;
-  import Waiting from "../Waiting.svelte";
+  import Waiting from "./Waiting.svelte";
   import CreateTicket from "./createTicket.svelte";
   import Dashboard from "./Dashboard.svelte";
   import Details from "./Details.svelte";
@@ -17,28 +16,19 @@
     if (result.ok) {
       result.json().then((e) => {
         console.log(e);
-        fhir_var = e.data;
         noOfTickets = e.noOfTickets;
       });
-    } else {
-      fhir_var = null;
     }
   });
 </script>
 
 <Nav navStatus="Dashboard" bind:state bind:click />
-<!-- <AdminNav bind:state bind:click /> -->
 {#if click == "home"}
-  <Dashboard
-    ticketsRem={noOfTickets}
-    bind:click
-    bind:patientDetails
-    bind:fhir_var
-  />
+  <Dashboard ticketsRem={noOfTickets} bind:click bind:patientDetails />
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
-  <SeeTickets bind:patientTicketDetails bind:fhir_var bind:click />
+  <SeeTickets bind:patientTicketDetails bind:click />
 {:else if click == "createTicket"}
   <CreateTicket />
 {:else if click == "ticketopen"}
@@ -47,5 +37,4 @@
   <Details user={patientDetails} />
 {:else if click == "waiting"}
   <Waiting />
-  <!--  -->
 {/if}

@@ -1,59 +1,65 @@
 <script>
   import { each } from "svelte/internal";
   import { fade, slide, scale } from "svelte/transition";
+  import Waiting from "./Waiting.svelte";
   export let click;
-  export let fhir_var;
   export let patientTicketDetails;
-  // fetch("/api/ticketinfo").then((result) => {
-  //   if (result.ok) {
-  //     result.json().then((e) => {
-  //       console.log(e);
-  //       fhir_var = e;
-  //     });
-  //   } else {
-  //     fhir_var = null;
-  //   }
-  //
+  let fhir_var = fetch("/api/ticketinfo").then((result) => {
+    if (result.ok) {
+      return result.json();
+    } else {
+      return null;
+    }
+  });
   function handleClick(patient) {
     click = "ticketopen";
     patientTicketDetails = patient;
   }
 </script>
 
-<main>
-  <div class="container" in:fade>
-    {#each fhir_var as patient}
-      <div class="card" in:slide>
-        <div class="info">
-          <h1>
-            {patient.createdBy.firstName + " " + patient.createdBy.lastName}
-          </h1>
-          <p>Created a ticket</p>
-          <ul>
-            <li>Type: {patient.type}</li>
-          </ul>
-          <div class="links">
-            <span class="a" on:click={handleClick(patient)}>See Ticket</span>
-            {#if patient.completed}
-              <span class="check"><i class="chk las la-check" />Checked</span>
-            {:else if !patient.completed}
-              <span class="check"
-                ><i class="unchk las la-eye-slash" />Unchecked</span
+{#await fhir_var}
+  <Waiting />
+{:then response_var}
+  <main>
+    <div class="container" in:fade>
+      {#each response_var.data as patient}
+        <div class="card" in:slide>
+          <div class="info">
+            <h1>
+              {patient.createdBy.firstName + " " + patient.createdBy.lastName}
+            </h1>
+            <p>Created a ticket</p>
+            <ul>
+              <li>Type: {patient.type}</li>
+            </ul>
+            <div class="links">
+              <span class="a" on:click={() => handleClick(patient)}
+                >See Ticket</span
               >
-            {/if}
+              {#if patient.completed}
+                <span class="check"><i class="chk las la-check" />Checked</span>
+              {:else if !patient.completed}
+                <span class="check"
+                  ><i class="unchk las la-eye-slash" />Unchecked</span
+                >
+              {/if}
+            </div>
           </div>
-        </div>
-        <!-- {#if patient.conditionImage}
+          <!-- {#if patient.conditionImage}
           <div class="conditionPhoto">
             <img src={`/api/getimage/${patient._id}`} alt="" />
           </div>
         {/if} -->
-      </div>
-    {/each}
-  </div>
-</main>
+        </div>
+      {/each}
+    </div>
+  </main>
+{/await}
 
 <style>
+  .waiting {
+    margin-left: 300px;
+  }
   main {
     margin-left: 250px;
   }
