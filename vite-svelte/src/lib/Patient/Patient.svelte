@@ -11,6 +11,7 @@
   import DiabetesTicket from "./DiabetesTicket.svelte";
   import Modal from "../Modals/Modal.svelte";
   import Payment from "./Payment.svelte";
+  import User from "./User.svelte";
   export let responseObject;
 </script>
 
@@ -24,7 +25,7 @@
 {#if patientState == "dashboard"}
   <PatientDasboard />
 {:else if patientState == "user"}
-  <!--  -->
+  <User />
 {:else if patientState == "tickets"}
   <Modal bind:show={ticketActive} big={false}>
     <Tickets bind:active bind:patientState />

@@ -3,6 +3,7 @@
   import Admin from "./lib/Admin/Admin.svelte";
   import Counter from "./lib/Admin/Admin.svelte";
   import Login from "./lib/Login.svelte";
+  // import Page from "./lib/Page.svelte";
   import Patient from "./lib/Patient/Patient.svelte";
   import UserLogin from "./lib/UserLogin.svelte";
   import Waiting from "./lib/Waiting.svelte";
@@ -32,6 +33,8 @@
     <Patient bind:state responseObject={response} />
   {:else if state == "admin"}
     <Admin bind:state />
+  {:else if state == "page"}
+    <!-- <Page bind:state /> -->
   {:else}
     <Login bind:state bind:response />
   {/if}

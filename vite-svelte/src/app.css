@@ -4,7 +4,6 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
   color:#213547; 
   background-color: #ffffff;;
 
@@ -14,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+  @-ms-viewport {
+    width: device-width;
+  }
 body{
   overflow-x: hidden;
 }

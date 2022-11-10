@@ -1,8 +1,10 @@
 <script>
   import { fade, slide } from "svelte/transition";
+  import swal from "sweetalert";
   export let state;
   export let click;
   export let navStatus;
+
   function clickedHome() {
     click = "home";
     navStatus = "Dashboard";
@@ -19,8 +21,17 @@
     click = "createTicket";
     navStatus = "Create Ticket";
   }
-  async function logoutButton() {
-    state = "n";
+  function logoutButton() {
+    swal({
+      title: "Log Out",
+      text: "Are you sre you want to log out?",
+      icon: "warning",
+      buttons: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        state = "n";
+      }
+    });
   }
 </script>
 
@@ -70,7 +81,13 @@
         </h2>
       </div>
       <div class="user-wrapper">
-        <i class="las la-user-nurse" />
+        <i
+          on:click={() => {
+            click = "adminInfo";
+            navStatus = "Admin";
+          }}
+          class="las la-user-nurse"
+        />
       </div>
     </header>
   </div>
@@ -170,5 +187,8 @@
     font-size: 50px;
     border-radius: 50%;
     margin-right: 1rem;
+  }
+  .user-wrapper i:hover {
+    cursor: pointer;
   }
 </style>

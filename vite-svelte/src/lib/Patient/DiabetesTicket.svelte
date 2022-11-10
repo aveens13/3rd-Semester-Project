@@ -45,7 +45,13 @@
       <div class="flex-measurements">
         <div class="measurements">
           <label for="HbA1c">HbA1c Level</label>
-          <input type="number" id="HbA1c" placeholder="in %" name="hba" />
+          <input
+            type="number"
+            id="HbA1c"
+            placeholder="in %"
+            name="hba"
+            required
+          />
         </div>
 
         <div class="measurements">
@@ -55,6 +61,7 @@
             id="fasting"
             placeholder="in mg/dL"
             name="glucoseFasting"
+            required
           />
         </div>
 
@@ -65,6 +72,7 @@
             id="random"
             placeholder="in mg/dL"
             name="glucoseRandom"
+            required
           />
         </div>
       </div>

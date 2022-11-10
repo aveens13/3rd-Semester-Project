@@ -8,11 +8,16 @@
   const date = new Date(time);
   const dateCreated = date.toDateString();
   function handleDelete() {
-    active = true;
-    setTimeout(() => {
-      active = false;
-      click = "seeTickets";
-    }, 1500);
+    fetch(`/api/deleteTicket/${patientTicketDetails._id}`).then((response) => {
+      if (response.ok) {
+        active = true;
+        setTimeout(() => {
+          active = false;
+          click = "seeTickets";
+        }, 1500);
+      } else {
+      }
+    });
   }
 </script>
 
@@ -73,6 +78,25 @@
 
             <span class="detailsMeasurement"
               >Heart Rate : {patientTicketDetails.measurements.heartRate} BPM</span
+            >
+          </span>
+        </div>
+      {:else if patientTicketDetails.type == "Diabetes"}
+        <div class="info-patient" in:slide>
+          Measurements :
+          <span class="details">
+            <span class="detailsMeasurement"
+              >HDB1AC Level : {patientTicketDetails.measurements.hbaLevel} %</span
+            >
+
+            <span class="detailsMeasurement"
+              >Glucose Fasting : {patientTicketDetails.measurements
+                .glucoseFasting} mg/dl</span
+            >
+
+            <span class="detailsMeasurement"
+              >Glucose Random : {patientTicketDetails.measurements
+                .glucoseRandom} mg/dl</span
             >
           </span>
         </div>

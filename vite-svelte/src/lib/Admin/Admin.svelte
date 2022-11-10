@@ -11,11 +11,14 @@
   import RegisterForm from "./RegisterForm.svelte";
   import SeeTickets from "./seeTickets.svelte";
   import Ticketmain from "./Ticketmain.svelte";
+  import AdminInfo from "./AdminInfo.svelte";
   let noOfTickets = 0;
+  let names = [];
   fetch("/api/ticketinfo").then((result) => {
     if (result.ok) {
       result.json().then((e) => {
         console.log(e);
+        names = e.data;
         noOfTickets = e.noOfTickets;
       });
     }
@@ -28,7 +31,7 @@
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
-  <SeeTickets bind:patientTicketDetails bind:click />
+  <SeeTickets bind:patientTicketDetails bind:click bind:names />
 {:else if click == "createTicket"}
   <CreateTicket />
 {:else if click == "ticketopen"}
@@ -37,4 +40,6 @@
   <Details user={patientDetails} />
 {:else if click == "waiting"}
   <Waiting />
+{:else if click == "adminInfo"}
+  <AdminInfo />
 {/if}

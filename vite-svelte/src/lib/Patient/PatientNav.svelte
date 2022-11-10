@@ -37,7 +37,7 @@
         </span>
         <span class="tooltip">Dashboard</span>
       </li>
-      <li>
+      <li on:click={() => (patientState = "user")}>
         <span class="a">
           <i class="bx bx-user" />
           <span class="links_name">User</span>
@@ -190,12 +190,17 @@
     color: #6d8baa;
     cursor: pointer;
   }
+  .sidebar.active ul li .a i {
+    font-size: 14px;
+  }
   .sidebar ul li .a i {
     height: 50px;
     min-width: 50px;
+    font-size: 20px;
     border-radius: 12px;
     line-height: 50px;
     text-align: center;
+    transition: all 100ms ease-in;
   }
   .sidebar .links_name {
     opacity: 0;

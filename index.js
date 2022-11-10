@@ -190,6 +190,26 @@ app.get("/api/ticketinfo", async (req, res) => {
     });
   });
 });
+
+app.get("/api/docs", (req, res) => {
+  res.send({
+    message: "Api Docs is still under development",
+  });
+});
+app.get("/api/deleteTicket/:ticketId", async (req, res) => {
+  var ticketId = req.params.ticketId;
+  try {
+    await ticket.findByIdAndDelete(ticketId).then(() => {
+      res.status(200).send({
+        message: "ticket was deleted",
+      });
+    });
+  } catch (error) {
+    res.status(404).send({
+      message: error.message,
+    });
+  }
+});
 app.post("/api/createticket", async (req, res) => {
   let condition = [];
   let medication = "";
@@ -222,7 +242,8 @@ app.post("/api/createticket", async (req, res) => {
     temperature = req.body.temperature;
     heartRate = req.body.heart;
   }
-  if (req.body.type == "Diabetes") {
+  console.log(req.body.type);
+  if (req.body.hba) {
     hbaLevel = req.body.hba;
     glucoseFasting = req.body.glucoseFasting;
     glucoseRandom = req.body.glucoseRandom;
@@ -250,7 +271,7 @@ app.post("/api/createticket", async (req, res) => {
   if (req.files) {
     var photo = req.files.photo;
     console.log(req.files.photo);
-    photo.mv(`./${photo.name}`, async (err) => {
+    photo.mv(`./uploads/${photo.name}`, async (err) => {
       if (err) throw err;
     });
     try {
@@ -328,6 +349,14 @@ app.post("/api/createticket", async (req, res) => {
               medication: {
                 isTaking: medication,
                 medicineList: req.body.medicine,
+              },
+              measurements: {
+                oxygenSaturation,
+                temperature,
+                heartRate,
+                hbaLevel,
+                glucoseFasting,
+                glucoseRandom,
               },
               medicationAllergy: {
                 hasAllergy: medicationAllergy,
