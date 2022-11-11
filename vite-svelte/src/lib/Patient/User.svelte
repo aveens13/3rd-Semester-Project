@@ -1,4 +1,8 @@
 <script>
+  export let responseObject;
+  const time = responseObject.response.birthDate;
+  const date = new Date(time);
+  const dateCreated = date.toDateString();
 </script>
 
 <main class="wrapper">
@@ -20,48 +24,64 @@
             <h4 class="text-right">Patient Information</h4>
           </div>
           <div class="row mt-2">
-            <div class="col-md-6">
-              <label for="firstName" class="labels">Name</label>
-              <p class="form-control">Subham</p>
+            <div class="col-md-12">
+              <label for="patientId" class="labels">PatientID</label>
+              <p class="form-control">{responseObject.response._id}</p>
             </div>
-            <div class="col-md-6">
-              <label for="lastName" class="labels">Surname</label>
-              <p class="form-control">Govinda</p>
+            <div class="name">
+              <div class="col-md-6">
+                <label for="firstName" class="labels">Name</label>
+                <p class="form-control">
+                  {responseObject.response.name[0].given[0]}
+                </p>
+              </div>
+              <div class="col-md-6">
+                <label for="lastName" class="labels">Surname</label>
+                <p class="form-control">
+                  {responseObject.response.name[0].family}
+                </p>
+              </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <label for="Number" class="labels">Mobile Number</label>
-              <p class="form-control">9808128733</p>
+              <p class="form-control">
+                {responseObject.response.telecom[0].value}
+              </p>
             </div>
             <div class="col-md-12">
               <label for="Address" class="labels">Address</label>
-              <p class="form-control">Hattiban,Lalitpur</p>
+              <p class="form-control">
+                {responseObject.response.address[0].line[0] +
+                  " ," +
+                  responseObject.response.address[0].city}
+              </p>
             </div>
             <div class="col-md-12">
               <label for="dob" class="labels">Date of Birth</label>
-              <p class="form-control">2002/10/11</p>
+              <p class="form-control">{dateCreated}</p>
             </div>
             <div class="col-md-12">
               <label for="sex" class="labels">Sex</label>
-              <p class="form-control">Male</p>
+              <p class="form-control">
+                {responseObject.response.gender.toUpperCase()}
+              </p>
             </div>
             <div class="col-md-12">
               <label for="age" class="labels">Age</label>
               <p class="form-control">19yrs 7m 0d</p>
             </div>
             <div class="col-md-12">
-              <label for="patientId" class="labels">PatientID</label>
-              <p class="form-control">77059676</p>
+              <label for="email" class="labels">Email</label>
+              <p class="form-control">
+                {responseObject.response.telecom[1].value}
+              </p>
             </div>
-            <div class="col-md-12">
-              <label for="Diagnosis" class="labels">Diagnosis</label>
-              <p class="form-control">Asthma</p>
-            </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
               <label for="refer" class="labels">Reffered by</label>
               <p class="form-control">Yadav Bhatta</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -84,6 +104,13 @@
     margin-left: 100px;
   }
 
+  .name {
+    display: flex;
+    margin-right: 3rem;
+  }
+  .name p {
+    margin-right: 3rem;
+  }
   .labels {
     font-weight: bold;
   }

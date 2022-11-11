@@ -16,10 +16,7 @@
   });
   let patientNames = [];
   names.forEach((name) => {
-    patientNames = [
-      ...patientNames,
-      name.createdBy.firstName + " " + name.createdBy.lastName,
-    ];
+    patientNames = [...patientNames, name.createdBy.firstName];
   });
   function handleClick(patient) {
     click = "ticketopen";

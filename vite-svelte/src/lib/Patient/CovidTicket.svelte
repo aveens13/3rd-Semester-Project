@@ -244,7 +244,7 @@
     font-family: "Poppins", sans-serif;
     outline-color: #6d8baa;
     outline-offset: 25px;
-    outline-style: groove;
+    /* outline-style: groove; */
   }
   h1 {
     font-size: 32px;

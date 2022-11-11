@@ -23,9 +23,9 @@
   responseNav={responseObject}
 />
 {#if patientState == "dashboard"}
-  <PatientDasboard />
+  <PatientDasboard bind:active />
 {:else if patientState == "user"}
-  <User />
+  <User bind:responseObject />
 {:else if patientState == "tickets"}
   <Modal bind:show={ticketActive} big={false}>
     <Tickets bind:active bind:patientState />

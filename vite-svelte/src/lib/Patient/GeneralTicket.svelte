@@ -173,9 +173,7 @@
         </div>
       </div>
       <div class="conditionphoto">
-        <label for="fieldphoto"
-          >Do you have any image of the part where you have problem?</label
-        >
+        <label for="fieldphoto">Attachments(Test reports,medications)</label>
         <div class="photo">
           <input
             type="file"

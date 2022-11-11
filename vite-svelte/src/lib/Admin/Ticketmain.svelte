@@ -2,6 +2,7 @@
   import { tick } from "svelte";
   import { fade, slide } from "svelte/transition";
   export let click;
+  export let ticketActive;
   export let patientTicketDetails;
   let active = false;
   const time = patientTicketDetails.dateCreated;
@@ -18,6 +19,10 @@
       } else {
       }
     });
+  }
+  function imageModal() {
+    click = "imagemodal";
+    ticketActive = true;
   }
 </script>
 
@@ -108,6 +113,7 @@
           <img
             src={`/api/getimage/${patientTicketDetails._id}`}
             alt="Condition"
+            on:click={imageModal}
           />
         </div>
       {/if}

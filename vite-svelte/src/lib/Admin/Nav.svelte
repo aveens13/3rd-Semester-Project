@@ -130,6 +130,7 @@
   }
   .sidebar-menu li {
     width: 100%;
+    /* background: black; */
     margin-bottom: 1.7rem;
     padding-left: 0rem;
   }
@@ -138,13 +139,16 @@
     color: #fff;
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
+    margin-right: 0.8rem;
     font-size: 1rem;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   .sidebar-menu .a:hover {
     background: #fff;
     color: #6d8baa;
-    border-radius: 30px 0px 0px 30px;
+    border-radius: 30px;
+    /* transition: all 0.1s ease; */
   }
   .sidebar-menu .a span:first-child {
     font-size: 1.5rem;

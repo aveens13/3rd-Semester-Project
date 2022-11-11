@@ -17,6 +17,9 @@
   @-ms-viewport {
     width: device-width;
   }
+html{
+  scroll-behavior: smooth;
+}
 body{
   overflow-x: hidden;
 }

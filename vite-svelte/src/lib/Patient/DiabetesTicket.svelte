@@ -161,16 +161,20 @@
 
 <style>
   .container {
-    margin-left: 50px;
+    margin-left: 100px;
+    transition: all 500ms ease;
+  }
+  .container.active {
+    margin-left: 250px;
   }
   .form {
-    margin: 50px 200px 50px 250px;
+    /* margin-left: 250px; */
 
     background-color: white;
     font-family: "Poppins", sans-serif;
     outline-color: #6d8baa;
     outline-offset: 25px;
-    outline-style: groove;
+    /* outline-style: groove; */
   }
   h1 {
     font-size: 32px;
