@@ -1,6 +1,8 @@
 <script>
   import logo from "../assets/pl.jpg";
   import hero from "../assets/hero.jpg";
+  import f1 from "../assets/remote.png";
+  import psg from "../assets/psg.jpg";
   import { fade } from "svelte/transition";
   export let state;
 </script>
@@ -39,7 +41,7 @@
             every day.
           </p>
           <div class="cta">
-            <span class="a btn" on:click={() => (state = "login")}
+            <span class="a btn" on:click={() => (state = "googleMaps")}
               >Get Started</span
             >
           </div>
@@ -47,15 +49,85 @@
         <div class="right">
           <img src={hero} alt="Hero" class="person" />
         </div>
-        <div id="features" class="features">
-          <!--  -->
+      </div>
+    </div>
+
+    <div class="features-area" id="features">
+      <div class="container">
+        <div class="feature-1">
+          <div class="feature-title">
+            <h1>Remotely Observe the Patients</h1>
+          </div>
+          <div class="bottom-area-features">
+            <div class="feature-text">
+              <p>
+                We use digital technologies to monitor and capture medical and
+                other health data from patients and electronically transmit this
+                information to healthcare providers for assessment and, when
+                necessary, recommendations and instructions.
+              </p>
+            </div>
+            <div class="feature-image">
+              <img src={f1} alt="Feature 1" />
+            </div>
+          </div>
+        </div>
+        <div class="feature-2">
+          <div class="feature-title">
+            <h1>Post-Surgery checkups at ease of your home</h1>
+          </div>
+          <div class="bottom-area-features">
+            <div class="feature-text">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
+                tempora facilis. Tenetur veritatis error qui. Eum, doloribus
+                assumenda, reiciendis enim suscipit nemo tenetur autem dicta
+                nostrum tempore officiis? Ab, cupiditate.
+              </p>
+            </div>
+            <div class="feature-image">
+              <img src={psg} alt="Feature 1" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="bottom-area">
-      <div class="conatiner">
-        <!--  -->
+      <div class="container">
+        <!-- Site footer -->
+        <footer class="site-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">
+                  Copyright &copy; 2022 All Rights Reserved by
+                  <a href="#">Pluscare</a>
+                </p>
+              </div>
+
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                  <li>
+                    <a class="facebook" href="#"><i class="fa fa-facebook" /></a
+                    >
+                  </li>
+                  <li>
+                    <a class="twitter" href="#"><i class="fa fa-twitter" /></a>
+                  </li>
+                  <li>
+                    <a class="dribbble" href="#"><i class="fa fa-dribbble" /></a
+                    >
+                  </li>
+                  <li>
+                    <a class="linkedin" href="#"><i class="fa fa-linkedin" /></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
@@ -69,7 +141,7 @@
     --darkOne: #312f3a;
     --darkTwo: #45424b;
     --lightOne: #919191;
-    --lightTwo: #aaa;
+    --lightTwo: #333;
   }
   *,
   *::before,
@@ -83,6 +155,44 @@
   }
   img {
     width: 100%;
+  }
+  .features-area {
+    margin-top: 4.5rem;
+  }
+  .features-area .container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .feature-1,
+  .feature-2 {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    justify-content: center;
+  }
+  .feature-title {
+    display: inline-block;
+    padding-bottom: 2rem;
+  }
+  .feature-text {
+    color: var(--lightOne);
+    font-size: 1.15rem;
+    /* justify-content: center; */
+  }
+  .bottom-area-features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bottom-area-features .feature-image {
+    opacity: 0.8;
+    width: 100%;
+    display: inline-block;
+    margin-left: 3rem;
+    height: auto;
+  }
+  .bottom-area-features .feature-image img {
+    border-radius: 1.8rem;
   }
   .a,
   a {
@@ -101,7 +211,7 @@
   }
   .container {
     position: relative;
-    max-width: 81rem;
+    max-width: 87rem;
     width: 100%;
     margin: 0 auto;
     padding: 0 3rem;
@@ -185,5 +295,79 @@
     transform: translate(15%, 25px);
     border-radius: 1.8rem;
     opacity: 85%;
+  }
+  .site-footer {
+    background-color: #fff;
+    padding: 45px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    color: #737373;
+  }
+  .site-footer {
+    margin-top: 3rem;
+  }
+  .site-footer a {
+    color: #737373;
+  }
+  .site-footer a:hover {
+    color: #3366cc;
+    text-decoration: none;
+  }
+  .site-footer .social-icons {
+    text-align: right;
+  }
+  .site-footer .social-icons a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 6px;
+    margin-right: 0;
+    border-radius: 100%;
+    background-color: #33353d;
+  }
+  .copyright-text {
+    margin: 0;
+  }
+  .social-icons {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  .social-icons li {
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+  .social-icons a {
+    background-color: #eceeef;
+    color: #818a91;
+    font-size: 16px;
+    display: inline-block;
+    line-height: 44px;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+  .social-icons a:active,
+  .social-icons a:focus,
+  .social-icons a:hover {
+    color: #fff;
+    background-color: #29aafe;
+  }
+  .social-icons a.facebook:hover {
+    background-color: #3b5998;
+  }
+  .social-icons a.twitter:hover {
+    background-color: #00aced;
+  }
+  .social-icons a.linkedin:hover {
+    background-color: #007bb6;
+  }
+  .social-icons a.dribbble:hover {
+    background-color: #ea4c89;
   }
 </style>
