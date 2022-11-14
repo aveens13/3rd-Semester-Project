@@ -42,8 +42,9 @@
           </p>
           <div class="cta">
             <span class="a btn" on:click={() => (state = "googleMaps")}
-              >Get Started</span
-            >
+              >Get Started
+              <i class="las la-caret-square-right" />
+            </span>
           </div>
         </div>
         <div class="right">
@@ -77,16 +78,17 @@
             <h1>Post-Surgery checkups at ease of your home</h1>
           </div>
           <div class="bottom-area-features">
-            <div class="feature-text">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
-                tempora facilis. Tenetur veritatis error qui. Eum, doloribus
-                assumenda, reiciendis enim suscipit nemo tenetur autem dicta
-                nostrum tempore officiis? Ab, cupiditate.
-              </p>
-            </div>
             <div class="feature-image">
               <img src={psg} alt="Feature 1" />
+            </div>
+            <div class="feature-text">
+              <p>
+                The patient-generated medical data and remote patient monitoring
+                after surgery can also help hospitals reduce the length of stay
+                and number of readmissions. After surgery checkups are important
+                but it is hard to always stay at the hospital for regular
+                checkups.
+              </p>
             </div>
           </div>
         </div>
@@ -158,6 +160,8 @@
   }
   .features-area {
     margin-top: 4.5rem;
+    /* background-color: rgba(0, 0, 0, 0.05);  */
+    /* border-radius: 30px 5px 50px 10px; */
   }
   .features-area .container {
     display: grid;
@@ -184,11 +188,18 @@
     justify-content: center;
     align-items: center;
   }
+  .feature-1 .bottom-area-features .feature-image {
+    margin-left: 3rem;
+  }
+  .feature-2 .bottom-area-features .feature-image {
+    margin-right: 3rem;
+    margin-top: 1.5rem;
+  }
   .bottom-area-features .feature-image {
     opacity: 0.8;
     width: 100%;
     display: inline-block;
-    margin-left: 3rem;
+    /* margin-left: 3rem; */
     height: auto;
   }
   .bottom-area-features .feature-image img {

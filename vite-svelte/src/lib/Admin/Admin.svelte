@@ -12,9 +12,6 @@
   import SeeTickets from "./seeTickets.svelte";
   import Ticketmain from "./Ticketmain.svelte";
   import AdminInfo from "./AdminInfo.svelte";
-  import Image from "./Image.svelte";
-  import Modal from "../Modals/Modal.svelte";
-  let ticketActive;
   let noOfTickets = 0;
   let names = [];
   fetch("/api/ticketinfo").then((result) => {
@@ -38,11 +35,7 @@
 {:else if click == "createTicket"}
   <CreateTicket />
 {:else if click == "ticketopen"}
-  <Ticketmain {patientTicketDetails} bind:click bind:ticketActive />
-{:else if click == "imagemodal"}
-  <Modal bind:show={ticketActive} big={false}>
-    <Image {patientTicketDetails} />
-  </Modal>
+  <Ticketmain {patientTicketDetails} bind:click />
 {:else if click == "details"}
   <Details user={patientDetails} />
 {:else if click == "waiting"}

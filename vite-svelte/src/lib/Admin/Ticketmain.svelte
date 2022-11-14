@@ -1,13 +1,62 @@
 <script>
   import { tick } from "svelte";
+  import { bind } from "svelte/internal";
   import { fade, slide } from "svelte/transition";
+  import swal from "sweetalert";
+  import Modal from "../Modals/Modal.svelte";
+  import Image from "./Image.svelte";
   export let click;
-  export let ticketActive;
+  let ticketActives = false;
   export let patientTicketDetails;
   let active = false;
   const time = patientTicketDetails.dateCreated;
   const date = new Date(time);
   const dateCreated = date.toDateString();
+  let contactNo;
+  fetch(`/api/contact/${patientTicketDetails.createdBy.userID}`).then((res) => {
+    // console.log(res);
+    res.json().then((response) => {
+      console.log(response);
+      contactNo = response.contactNo;
+    });
+  });
+  async function handleVisitHospital() {
+    await fetch(`/api/visitHospital/${patientTicketDetails._id}`).then(
+      (response) => {
+        if (response.ok) {
+          response.json().then((res) => {
+            console.log(res);
+            swal({
+              title: `${res.status}`,
+              text: `${res.message} triggered`,
+              icon: "info",
+            });
+          });
+        } else {
+          console.log("Cannot get visit hospital");
+        }
+      }
+    );
+  }
+
+  async function handleSendNurse() {
+    await fetch(`/api/sendNurse/${patientTicketDetails._id}`).then(
+      (response) => {
+        if (response.ok) {
+          response.json().then((res) => {
+            console.log(res);
+            swal({
+              title: `${res.status}`,
+              text: `${res.message} triggered`,
+              icon: "info",
+            });
+          });
+        } else {
+          console.log("Cannot Post Send Nurse");
+        }
+      }
+    );
+  }
   function handleDelete() {
     fetch(`/api/deleteTicket/${patientTicketDetails._id}`).then((response) => {
       if (response.ok) {
@@ -21,11 +70,15 @@
     });
   }
   function imageModal() {
-    click = "imagemodal";
-    ticketActive = true;
+    ticketActives = true;
   }
 </script>
 
+{#if ticketActives}
+  <Modal bind:show={ticketActives} big={false}>
+    <Image {patientTicketDetails} />
+  </Modal>
+{/if}
 <main in:fade>
   <div class="container">
     <div class="info">
@@ -35,6 +88,10 @@
           >{patientTicketDetails.createdBy.firstName}
           {patientTicketDetails.createdBy.lastName}
         </span>
+      </div>
+      <div class="info-patient" in:slide>
+        Contact Number :
+        <span class="details">{contactNo} </span>
       </div>
       <div class="info-patient" in:slide>
         Created on :
@@ -121,10 +178,14 @@
   </div>
   <div class="actions">
     <div class="button">
-      <button><i class="las la-user-md" /> Send Nurse</button>
+      <button on:click={handleSendNurse}
+        ><i class="las la-user-md" /> Send Nurse</button
+      >
     </div>
     <div class="button">
-      <button><i class="las la-clinic-medical" /> Visit Hospital</button>
+      <button on:click={handleVisitHospital}
+        ><i class="las la-clinic-medical" /> Visit Hospital</button
+      >
     </div>
     <div class="danger">
       <button on:click={handleDelete}><i class="las la-trash" /> Delete</button>

@@ -6,7 +6,7 @@
 
 <main in:fade>
   <div class={active ? "container active" : "container"}>
-    <span> Dashboard</span>
+    <span class="dashboardTop"><h1>Dashboard</h1></span>
     <div class="main-box">
       <div class="first-box">
         <div class="history">
@@ -50,17 +50,18 @@
     margin-left: 250px;
   }
   main {
-    margin-left: 80px;
     height: 96vh;
+    margin-left: 80px;
     font-family: "Poppins", sans-serif;
-    background-color: #f2f6fa;
+    /* background-color: #f2f6fa; */
     margin-right: 20px;
   }
   .main-box {
+    margin-top: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    min-height: 95vh;
+    min-height: 90vh;
   }
   .first-box {
     margin-top: 100px;
@@ -74,7 +75,7 @@
     text-align: center;
     border-radius: 25px;
     background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
   }
   .history-bar {
     display: grid;
@@ -94,7 +95,11 @@
     text-align: center;
     border-radius: 25px;
     background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    box-shadow: 0.1rem 0rem 5rem 0.5rem rgba(132, 139, 200, 0.18);
+  }
+  .notification,
+  .history span {
+    font-size: 1.2rem;
   }
   .history-sort {
     display: flex;

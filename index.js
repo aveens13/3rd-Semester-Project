@@ -12,6 +12,7 @@ const patient = require("./patientSchema");
 const patientlogin = require("./patientLoginSchema");
 const ses = require("./sessions");
 const ticket = require("./ticketSchema");
+const ticketFinal = require("./ticketFinalSchema");
 const cookieParser = require("cookie-parser");
 dotenv.config();
 const PORT = process.env.PORT;
@@ -167,11 +168,78 @@ app.post("/api/admin-login", async (req, res) => {
   });
 });
 
-app.get("/api/contact/", (req, res) => {
-  res.send({
-    value: "test",
-    er: "error",
+app.get("/api/visitHospital/:ticketId", async (req, res) => {
+  const ticketId = req.params.ticketId;
+  const userId = await ticket.findById(ticketId).then((results) => {
+    return results.createdBy.userID;
   });
+  const UserDetails = await patient.findById(userId).then((results) => {
+    return results;
+  });
+  console.log(ticketId);
+  await ticket.findByIdAndUpdate(ticketId, { completed: true });
+  console.log(UserDetails);
+  try {
+    await ticketFinal.create({
+      ticketId,
+      userId,
+      status: "Pluscare has requested you to visit Hospital",
+    });
+  } catch (err) {
+    return res.status(404).send({
+      status: "Server Error",
+      message: "Error database",
+    });
+  }
+  res.status(200).send({
+    status: "Emergency",
+    message: "Visit Hospital",
+  });
+});
+
+app.get("/api/sendNurse/:ticketId", async (req, res) => {
+  const ticketId = req.params.ticketId;
+  const userId = await ticket.findById(ticketId).then((results) => {
+    return results.createdBy.userID;
+  });
+  const UserDetails = await patient.findById(userId).then((results) => {
+    return results;
+  });
+  console.log(ticketId);
+  await ticket.findByIdAndUpdate(ticketId, { completed: true });
+  console.log(UserDetails);
+  try {
+    await ticketFinal.create({
+      ticketId,
+      userId,
+      status: "Pluscare has sent a nurse and he/she will contact you",
+    });
+  } catch (err) {
+    return res.status(404).send({
+      status: "Server Error",
+      message: "Error database",
+    });
+  }
+  return res.status(200).send({
+    status: "Queued for checkup",
+    message: "Send Nurse",
+  });
+});
+
+app.get("/api/contact/:patient", async (req, res) => {
+  const patientInfo = req.params.patient;
+  try {
+    await patient.findById(patientInfo).then((results) => {
+      console.log(results);
+      res.status(200).send({
+        contactNo: results.telecom[0].value,
+      });
+    });
+  } catch (err) {
+    res.status(404).send({
+      contactNo: "",
+    });
+  }
 });
 
 app.get("/api/getimage/:picture", async (req, res) => {
@@ -182,6 +250,7 @@ app.get("/api/getimage/:picture", async (req, res) => {
   });
 });
 app.get("/api/ticketinfo", async (req, res) => {
+  console.log("ticketinfo");
   const noOfTickets = await ticket.find({}).count();
   await ticket.find({}).then((results) => {
     res.status(200).send({
@@ -280,12 +349,13 @@ app.post("/api/createticket", async (req, res) => {
         patientlogin.findById(userId).then((result) => {
           patient.findById(result.patientId).then(async (response) => {
             patientResult = response;
-            console.log(patientResult);
+            console.log(patientResult._id);
             await ticket.create({
               type: req.body.type,
               createdBy: {
                 firstName: patientResult.name[0].given[0],
                 lastName: patientResult.name[0].family,
+                userID: patientResult._id,
               },
               condition,
               symptom,
@@ -343,7 +413,7 @@ app.post("/api/createticket", async (req, res) => {
               createdBy: {
                 firstName: patientResult.name[0].given[0],
                 lastName: patientResult.name[0].family,
-                userId: patientResult._id,
+                userID: patientResult._id,
               },
               symptom,
               medication: {

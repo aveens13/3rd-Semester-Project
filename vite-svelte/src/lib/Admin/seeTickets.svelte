@@ -139,7 +139,7 @@
             <p>Created a ticket</p>
             <ul>
               <li>Type: {patient.type}</li>
-              <li><span class="status">Status: </span></li>
+              <!-- <li><span class="status">Status: </span></li> -->
             </ul>
             <div class="links">
               <span class="a" on:click={() => handleClick(patient)}

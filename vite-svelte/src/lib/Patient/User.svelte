@@ -1,11 +1,12 @@
 <script>
+  import { fade } from "svelte/transition";
   export let responseObject;
   const time = responseObject.response.birthDate;
   const date = new Date(time);
   const dateCreated = date.toDateString();
 </script>
 
-<main class="wrapper">
+<main class="wrapper" in:fade>
   <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
       <div class="col-md-3 border-right">
