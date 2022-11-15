@@ -23,7 +23,7 @@
   responseNav={responseObject}
 />
 {#if patientState == "dashboard"}
-  <PatientDasboard bind:active />
+  <PatientDasboard bind:active patient={responseObject} />
 {:else if patientState == "user"}
   <User bind:responseObject />
 {:else if patientState == "tickets"}

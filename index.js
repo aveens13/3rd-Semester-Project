@@ -53,6 +53,8 @@ app.get("/api/getimage/:picture", handlers.getPicture);
 app.get("/api/ticketinfo", handlers.ticketInfo);
 app.get("/api/docs", handlers.documentation);
 app.get("/api/deleteTicket/:ticketId", handlers.deleteTicket);
+app.get("/api/getticketNotifications/:patientId", handlers.notificationTicket);
+app.get("/api/getTicketIndividual/:userId", handlers.ticketIndividual);
 
 //Post API requests
 app.post("/api/signin", authentication.signin);
