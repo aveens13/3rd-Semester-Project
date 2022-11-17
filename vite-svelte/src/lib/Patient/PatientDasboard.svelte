@@ -69,6 +69,37 @@
             </div>
           </div>
         </div>
+        <div class="bottom-section">
+          <div class="card-main">
+            <div class="card">
+              <div class="card-insight">
+                <span>Heartrate</span><i class="las la-heartbeat" />
+              </div>
+              <div class="info">
+                <span>70</span>
+                <p>bpm</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-insight">
+                <span>Fever</span><i class="las la-thermometer" />
+              </div>
+              <div class="info">
+                <span>--</span>
+                <p>&#176;F</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-insight">
+                <span>Weight</span><i class="las la-weight" />
+              </div>
+              <div class="info">
+                <span>{patient.response.weight}</span>
+                <p>Kg</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="notification">
@@ -173,10 +204,73 @@
     min-height: 80vh;
   }
   .first-box {
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    display: flex;
+    flex-direction: column;
     width: 65%;
   }
+  .first-box .bottom-section {
+    margin: 2rem 1.5rem 2rem 0;
+  }
 
+  .bottom-section .card-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0rem;
+  }
+
+  .bottom-section .card-main .card {
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    border-radius: 1.8rem;
+    /* background-color: #5157bd;
+    color: #fff; */
+    margin-left: 2rem;
+    transition: all 0.2s ease;
+    /* box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);*/
+    box-shadow: 0.1rem 0rem 5rem 0.5rem rgba(132, 139, 200, 0.18);
+  }
+  .bottom-section .card-main .card:hover {
+    transition: all 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    background-color: #5157bd;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .bottom-section .card-main .card .info {
+    display: flex;
+    margin: auto;
+  }
+  .card-main .card .info span {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .card-main .card .info p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .card .card-insight {
+    display: flex;
+    width: 100%;
+    margin-top: 2rem;
+    /* background-color: #57bd84; */
+    font-family: "Poppins", sans-serif;
+  }
+  .card .card-insight span {
+    margin-left: 1rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  .card .card-insight i {
+    margin: auto;
+    padding-left: 5rem;
+    font-weight: 900;
+    font-size: 1.6rem;
+  }
   .history {
     display: flex;
     flex-direction: column;
@@ -185,6 +279,10 @@
     border-radius: 25px;
     background-color: #ffffff;
     box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+  }
+  .history span {
+    font-weight: bolder !important;
+    font-size: 1.8rem !important;
   }
   .history-bar {
     display: grid;
@@ -232,6 +330,11 @@
   .notification-banner .text-notification i {
     font-size: 2rem;
     padding: 0.1rem 1.2rem 0rem 0rem;
+  }
+  .notification span i:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+    transition: all 0.5s ease;
   }
   .notification-banner .text-notification .la-ticket-alt {
     color: #41f1b6;

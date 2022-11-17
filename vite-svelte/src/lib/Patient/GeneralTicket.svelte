@@ -37,6 +37,28 @@
       on:submit|preventDefault={submitHandler}
       enctype="multipart/form-data"
     >
+      <div class="measure">
+        <div class="measurements">
+          <label for="heart">Heart Rate</label>
+          <input
+            type="number"
+            id="heart"
+            name="heart"
+            placeholder="60 bpm"
+            required
+          />
+        </div>
+        <div class="measurements">
+          <label for="weight">Weight</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            placeholder="60Kg"
+            required
+          />
+        </div>
+      </div>
       <input type="hidden" name="type" value="General" />
       <div class="conditions">
         <h4>
@@ -196,7 +218,14 @@
   .asterick {
     color: red;
   }
-
+  .measure {
+    display: flex;
+  }
+  .measure .measurements input {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 1.2rem;
+  }
   .textarea {
     background: #ebeaea;
     color: #666666;

@@ -1,22 +1,19 @@
 <script>
+  export let active;
   import { fade } from "svelte/transition";
+  import logo from "../../assets/pl.jpg";
   export let responseObject;
   const time = responseObject.response.birthDate;
   const date = new Date(time);
   const dateCreated = date.toDateString();
 </script>
 
-<main class="wrapper" in:fade>
+<div class={active ? "wrapper active" : "wrapper"} in:fade>
   <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
       <div class="col-md-3 border-right">
         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img
-            alt=""
-            class="rounded-circle"
-            width="300px"
-            src="https://media-exp1.licdn.com/dms/image/C4D0BAQGAUbVRtYhCwQ/company-logo_200_200/0/1645348114439?e=2147483647&v=beta&t=HCurpBmcJTOwhmVcC5UkJTuxuCJRguldsHPRhoqyU9c"
-          />
+          <img alt="ImagePluscare" width="300px" src={logo} />
         </div>
       </div>
       <div class="col-md-5 border-right">
@@ -88,12 +85,17 @@
       </div>
     </div>
   </div>
-</main>
+</div>
 
 <style>
-  main {
+  .wrapper.active {
+    margin-left: 400px;
+    margin-bottom: 100px;
+  }
+  .wrapper {
     margin-left: 250px;
     margin-bottom: 100px;
+    transition: all 0.3s ease-in;
   }
   .form-control:focus {
     box-shadow: none;

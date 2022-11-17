@@ -67,32 +67,34 @@
   </div>
   <div class="patients-list">
     <h2>Pluscare Patients</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Status</th>
-          <th>Payment</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {#each response as patient}
+    <div class="patients">
+      <table>
+        <thead>
           <tr>
-            <td in:slide
-              >{patient.name[0].given[0] + " " + patient.name[0].family}</td
-            >
-            <td in:slide>{patient.telecom[0].value}</td>
-            <td in:slide>Pending</td>
-            <td class="warning" in:slide>Due</td>
-            <td class="primary" in:slide on:click={() => handleClick(patient)}
-              >Details</td
-            >
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th />
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each response as patient}
+            <tr>
+              <td in:slide
+                >{patient.name[0].given[0] + " " + patient.name[0].family}</td
+              >
+              <td in:slide>{patient.telecom[0].value}</td>
+              <td in:slide>Pending</td>
+              <td class="warning" in:slide>Due</td>
+              <td class="primary" in:slide on:click={() => handleClick(patient)}
+                >Details</td
+              >
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 

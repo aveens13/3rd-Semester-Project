@@ -42,28 +42,28 @@
     </div>
     <div class="sidebar-menu">
       <ul>
-        <li on:click={clickedHome}>
+        <li on:click={clickedHome} title="Home">
           <span class="a"
             ><span class="las la-igloo" /><span>Dashboard</span></span
           >
         </li>
-        <li on:click={clickedRegister}>
+        <li on:click={clickedRegister} title="Registration">
           <span class="a"
             ><span class="las la-users" /><span>Register a patient</span></span
           >
         </li>
-        <li on:click={clickedsee}>
+        <li on:click={clickedsee} title="See created Tickets">
           <span class="a"
             ><span class="las la-clipboard-list" /><span>See Tickets</span
             ></span
           >
         </li>
-        <li on:click={clickedCreate}>
+        <li on:click={clickedCreate} title="Create a ticket">
           <span class="a"
             ><span class="las la-receipt" /><span>Create Tickets</span></span
           >
         </li>
-        <li on:click={logoutButton}>
+        <li on:click={logoutButton} title="Log Out">
           <span class="logout">
             <i class="bx bx-log-out" id="log_out" />
           </span>

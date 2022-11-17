@@ -25,7 +25,7 @@
 {#if patientState == "dashboard"}
   <PatientDasboard bind:active patient={responseObject} />
 {:else if patientState == "user"}
-  <User bind:responseObject />
+  <User bind:responseObject bind:active />
 {:else if patientState == "tickets"}
   <Modal bind:show={ticketActive} big={false}>
     <Tickets bind:active bind:patientState />

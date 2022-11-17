@@ -17,6 +17,12 @@ const patientSchema = new mongoose.Schema({
   address: {
     type: Array,
   },
+  blood: {
+    type: String,
+  },
+  weight: {
+    type: Number,
+  },
 });
 
 const patient = mongoose.model("Patient", patientSchema);

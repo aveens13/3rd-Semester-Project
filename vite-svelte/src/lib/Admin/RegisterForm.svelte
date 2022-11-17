@@ -95,7 +95,23 @@
         </div>
         <div class="input-field">
           <label for="blood">Blood Group</label>
-          <input type="text" id="blood" name="bloodGroup" placeholder="A+" />
+          <input
+            type="text"
+            id="blood"
+            name="blood"
+            placeholder="A+"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <label for="weight">Weight</label>
+          <input
+            type="text"
+            id="weight"
+            name="weight"
+            placeholder="60Kg"
+            required
+          />
         </div>
       </div>
 
@@ -103,11 +119,11 @@
       <div class="title">Gender</div>
       <div class="radios">
         <div class="input-radio">
-          <input type="radio" id="male" value="male" name="gender" />
+          <input type="radio" id="male" value="Male" name="gender" />
           <label for="male">Male</label>
         </div>
         <div class="input-radio">
-          <input type="radio" id="female" value="female" name="gender" />
+          <input type="radio" id="female" value="Female" name="gender" />
           <label for="female">Female</label>
         </div>
         <div class="input-radio">

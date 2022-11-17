@@ -75,6 +75,26 @@
             required
           />
         </div>
+        <div class="measurements">
+          <label for="weight">Weight</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            placeholder="60Kg"
+            required
+          />
+        </div>
+        <div class="measurements">
+          <label for="heart">Heart Rate</label>
+          <input
+            type="number"
+            id="heart"
+            name="heart"
+            placeholder="60 bpm"
+            required
+          />
+        </div>
       </div>
       <hr />
 
