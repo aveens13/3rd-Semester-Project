@@ -37,5 +37,5 @@
 {:else if patientState == "diabetesTicket"}
   <DiabetesTicket bind:active />
 {:else if patientState == "payment"}
-  <Payment />
+  <Payment patient={responseObject} bind:active />
 {/if}

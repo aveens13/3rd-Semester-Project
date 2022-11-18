@@ -96,6 +96,7 @@
     ticketActives = true;
   }
   function downloadPDF() {
+    // @ts-ignore
     html2pdf().from(container).set(opt).save();
   }
 </script>
