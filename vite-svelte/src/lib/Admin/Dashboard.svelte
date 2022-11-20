@@ -7,7 +7,7 @@
   let patients = 0;
   let response = [];
   let ticktesDone = 0;
-  export let ticketsRem;
+  let ticketsRem = 0;
   fetch("/api/patients").then((result) => {
     if (result.ok) {
       console.log(result);
@@ -17,6 +17,16 @@
       });
     } else {
       response = null;
+    }
+  });
+
+  fetch("/api/ticketinfo").then((result) => {
+    if (result.ok) {
+      result.json().then((e) => {
+        console.log(e);
+        ticketsRem = e.noOfTickets;
+        ticktesDone = e.ticketsdone;
+      });
     }
   });
   function handleClick(patient) {

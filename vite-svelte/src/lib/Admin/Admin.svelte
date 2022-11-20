@@ -12,14 +12,12 @@
   import SeeTickets from "./seeTickets.svelte";
   import Ticketmain from "./Ticketmain.svelte";
   import AdminInfo from "./AdminInfo.svelte";
-  let noOfTickets = 0;
   let names = [];
   fetch("/api/ticketinfo").then((result) => {
     if (result.ok) {
       result.json().then((e) => {
         console.log(e);
         names = e.data;
-        noOfTickets = e.noOfTickets;
       });
     }
   });
@@ -27,7 +25,7 @@
 
 <Nav navStatus="Dashboard" bind:state bind:click />
 {#if click == "home"}
-  <Dashboard ticketsRem={noOfTickets} bind:click bind:patientDetails />
+  <Dashboard bind:click bind:patientDetails />
 {:else if click == "register"}
   <RegisterForm />
 {:else if click == "seeTickets"}
