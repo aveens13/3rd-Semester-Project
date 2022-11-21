@@ -3,7 +3,7 @@
   import hero from "../assets/hero.jpg";
   import f1 from "../assets/remote.png";
   import psg from "../assets/psg.jpg";
-  import { fade } from "svelte/transition";
+  import { fade, scale, slide } from "svelte/transition";
   export let state;
 </script>
 
@@ -95,6 +95,40 @@
       </div>
     </div>
 
+    <div id="pricing" class="pricing-area" in:slide>
+      <div class="container">
+        <div class="card">
+          <div class="price">NRs 555</div>
+          <div class="month">per month</div>
+          <div class="info-price">
+            Best value for a single patient using our resources.
+          </div>
+          <div class="info">
+            <i class="las la-check-circle" /> All resources available
+          </div>
+          <div class="info">
+            <i class="las la-check-circle" /> Single Patient
+          </div>
+        </div>
+        <div class="card">
+          <div class="price">NRs 955</div>
+          <div class="month">per month</div>
+          <div class="info-price">
+            Best value for a patient using our resources for a family.
+          </div>
+          <div class="info">
+            <i class="las la-check-circle" /> All resources available
+          </div>
+          <div class="info">
+            <i class="las la-check-circle" /> Up to 4 patients*
+          </div>
+          <div class="info">
+            <i class="las la-check-circle" /> Priority checkups
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="bottom-area">
       <div class="container">
         <!-- Site footer -->
@@ -157,6 +191,55 @@
   }
   img {
     width: 100%;
+  }
+  .pricing-area {
+    margin-top: 4.5rem;
+  }
+
+  .pricing-area .container {
+    display: flex;
+  }
+
+  .pricing-area .container .card {
+    width: 100%;
+    margin: 0 5rem;
+    /* background-color: #414a4c; */
+    border-radius: 1.8rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    transition: all 0.5s ease;
+  }
+
+  .pricing-area .container .card:hover {
+    background-color: #29aafe;
+    color: white;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  .pricing-area .container .card .price {
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    margin-top: 3rem;
+    font-weight: bolder;
+  }
+  .pricing-area .container .card .month {
+    font-family: "Poppins", sans-serif;
+    /* color: var(--darkOne); */
+    padding: 1rem;
+  }
+  .pricing-area .container .card .info-price {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    /* color: var(--darkTwo); */
+    padding: 1rem;
+  }
+  .pricing-area .container .card .info {
+    margin-top: 3rem;
+    margin-right: 4rem;
   }
   .features-area {
     margin-top: 4.5rem;

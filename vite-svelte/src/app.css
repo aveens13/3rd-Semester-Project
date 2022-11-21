@@ -4,8 +4,8 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  color:#213547; 
-  background-color: #ffffff;;
+  color: #213547;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,19 +14,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
-  @-ms-viewport {
-    width: device-width;
-  }
-html{
+@-ms-viewport {
+  width: device-width;
+}
+html {
   scroll-behavior: smooth;
 }
-body{
+/* body {
+  scroll-behavior: smooth;
+} */
+body {
   overflow-x: hidden;
 }
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
-::-webkit-file-upload-button{
+::-webkit-file-upload-button {
   color: white;
   background: #6d8baa;
   padding: 10px;
@@ -34,12 +37,16 @@ body::-webkit-scrollbar{
   border-radius: 1.8rem;
   outline: none;
 }
-button:hover{
+button:hover {
   cursor: pointer;
 }
-/* @media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    color: rgba(0, 0, 0, 0.87);
+    color: white;
+    box-shadow: none;
+    background-color: #242424;
+  }
+  * {
     background-color: #242424;
   }
   a:hover {

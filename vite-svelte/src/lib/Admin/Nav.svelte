@@ -17,15 +17,12 @@
     click = "seeTickets";
     navStatus = "See Tickets";
   }
-  function clickedCreate() {
-    click = "createTicket";
-    navStatus = "Create Ticket";
-  }
   function logoutButton() {
     swal({
       title: "Log Out",
       text: "Are you sre you want to log out?",
       icon: "warning",
+      //@ts-ignore
       buttons: true,
     }).then((willDelete) => {
       if (willDelete) {
@@ -56,11 +53,6 @@
           <span class="a"
             ><span class="las la-clipboard-list" /><span>See Tickets</span
             ></span
-          >
-        </li>
-        <li on:click={clickedCreate} title="Create a ticket">
-          <span class="a"
-            ><span class="las la-receipt" /><span>Create Tickets</span></span
           >
         </li>
         <li on:click={logoutButton} title="Log Out">

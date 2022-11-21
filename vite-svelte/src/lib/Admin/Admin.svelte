@@ -30,8 +30,6 @@
   <RegisterForm />
 {:else if click == "seeTickets"}
   <SeeTickets bind:patientTicketDetails bind:click bind:names />
-{:else if click == "createTicket"}
-  <CreateTicket />
 {:else if click == "ticketopen"}
   <Ticketmain {patientTicketDetails} bind:click />
 {:else if click == "details"}
