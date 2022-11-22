@@ -63,7 +63,7 @@
     </header>
     <article>
       <h1>Recipient</h1>
-      <address contenteditable>
+      <address>
         <p>Pluscare<br />28 Kilo Dhulikhel</p>
       </address>
       <table class="meta">

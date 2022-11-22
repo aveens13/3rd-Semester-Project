@@ -55,6 +55,7 @@ app.get("/api/docs", handlers.documentation);
 app.get("/api/deleteTicket/:ticketId", handlers.deleteTicket);
 app.get("/api/getticketNotifications/:patientId", handlers.notificationTicket);
 app.get("/api/getTicketIndividual/:userId", handlers.ticketIndividual);
+app.post("/api/editPatient/:patientId", registation.editPatient);
 
 //Post API requests
 app.post("/api/signin", authentication.signin);

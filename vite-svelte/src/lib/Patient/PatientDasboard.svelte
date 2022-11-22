@@ -1,6 +1,5 @@
 <script>
   export let active;
-  import { Label } from "@smui/snackbar";
   import { fade, slide } from "svelte/transition";
   export let patient;
   let ticketFinal = [];
@@ -82,7 +81,7 @@
             </div>
             <div class="card">
               <div class="card-insight">
-                <span>Fever</span><i class="las la-thermometer" />
+                <span>Temperature</span><i class="las la-thermometer" />
               </div>
               <div class="info">
                 <span>--</span>
@@ -304,14 +303,12 @@
   .notification {
     margin-top: 20px;
     width: 25%;
-    max-height: 80vh;
+    max-height: 70vh;
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
     text-align: center;
     border-radius: 25px;
-    /* background-color: #fff;
-    color: #2d2d2f; */
     color: #fff;
     background-color: #2d2d2f;
     box-shadow: 0.1rem 0rem 5rem 0.5rem rgba(132, 139, 200, 0.18);

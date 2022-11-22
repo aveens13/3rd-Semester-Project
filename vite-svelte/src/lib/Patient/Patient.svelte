@@ -12,6 +12,7 @@
   import Modal from "../Modals/Modal.svelte";
   import Payment from "./Payment.svelte";
   import User from "./User.svelte";
+  import EditDetails from "./EditDetails.svelte";
   export let responseObject;
 </script>
 
@@ -25,7 +26,9 @@
 {#if patientState == "dashboard"}
   <PatientDasboard bind:active patient={responseObject} />
 {:else if patientState == "user"}
-  <User bind:responseObject bind:active />
+  <User user={responseObject.response} bind:active bind:patientState />
+{:else if patientState == "editDetails"}
+  <EditDetails user={responseObject.response} bind:active bind:patientState />
 {:else if patientState == "tickets"}
   <Modal bind:show={ticketActive} big={false}>
     <Tickets bind:active bind:patientState />

@@ -26,15 +26,27 @@
     transition: all 0.5s ease;
   }
   .container .conditions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
+    margin-right: 3rem;
+    flex-direction: column;
   }
   .container .conditions button {
+    font-family: "Poppins", sans-serif;
     padding: 1rem;
     margin: 0.8rem;
-    font-size: 1rem;
+    width: 100%;
+    font-size: 1.5rem;
     font-family: "Poppins", sans-serif;
     border-radius: 1.8rem;
     border: none;
+  }
+
+  .container .conditions button:hover {
+    background-color: #5157bd;
+    transition: all 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.1);
   }
 </style>

@@ -5,7 +5,7 @@
   import IconButton from "@smui/icon-button";
   import Button from "@smui/button";
   let snackbarError;
-  let snackbarSuccess;
+  let snackbarText = "";
   let changed;
   let data = null;
   export let state;
@@ -28,8 +28,11 @@
       const e = await response.json();
       console.log(e);
       state = "admin";
+    } else {
+      console.log("Snackbar");
+      snackbarText = "Cannot login, check admin username and password";
+      snackbarError.open();
     }
-    snackbarError.open();
   }
   async function submitSignin(event) {
     const form = event.currentTarget;
@@ -51,6 +54,8 @@
       response = e;
       console.log(response);
     } else {
+      snackbarText =
+        "Cannot login, check patient's username and password on your mail";
       snackbarError.open();
     }
   }
@@ -58,7 +63,7 @@
 </script>
 
 <Snackbar bind:this={snackbarError} class="demo-error">
-  <Label>Cannot Login. Check your username or Password</Label>
+  <Label>{snackbarText}</Label>
   <Actions>
     <IconButton class="material-icons" title="Dismiss">close</IconButton>
   </Actions>
