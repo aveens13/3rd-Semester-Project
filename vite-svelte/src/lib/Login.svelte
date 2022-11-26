@@ -15,7 +15,7 @@
     const formData = new FormData(form);
     const plainFormdata = Object.fromEntries(formData.entries());
     const formDataJsonString = JSON.stringify(plainFormdata);
-    const response = await fetch("/api/admin-login", {
+    const response = await fetch("http://project3.centralindia.cloudapp.azure.com:5000/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
