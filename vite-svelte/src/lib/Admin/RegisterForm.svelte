@@ -1,6 +1,28 @@
 <script>
   import swal from "sweetalert";
   import { fade, slide } from "svelte/transition";
+  let isNumber = true;
+  let letterCount = 0;
+  let phoneNoValid = "";
+  function addInputListener(event) {
+    var number = /^[a-zA-Z]*$/;
+    if (event.data == null) {
+      letterCount -= 1;
+      console.log("Backspace");
+      isNumber = true;
+      // event.target.disabled = false;
+    } else if (event.data.match(number)) {
+      event.target.value = phoneNoValid;
+      letterCount = letterCount + 1;
+      console.log(event);
+      // event.target.value =
+      // event.target.disabled = true;
+      isNumber = false;
+    } else {
+      isNumber = true;
+    }
+    phoneNoValid = event.target.value;
+  }
   async function onSubmit(event) {
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -31,10 +53,12 @@
 
       console.log(result);
     } else {
-      swal({
-        title: "Registration Failed",
-        text: "Cannot register the patient with the given details",
-        icon: "error",
+      response.json().then((result) => {
+        swal({
+          title: "Registration Failed",
+          text: result.message,
+          icon: "error",
+        });
       });
     }
   }
@@ -51,7 +75,9 @@
       <span class="title">Personal Details</span>
       <div class="fields">
         <div class="input-field">
-          <label for="first name">First name</label>
+          <label for="first name"
+            >First name<span class="asterick">&#42;</span></label
+          >
           <input
             type="text"
             id="first name"
@@ -70,7 +96,9 @@
           />
         </div>
         <div class="input-field">
-          <label for="last name">Last name</label>
+          <label for="last name"
+            >Last name<span class="asterick">&#42;</span></label
+          >
           <input
             type="text"
             id="last name"
@@ -81,7 +109,9 @@
         </div>
         <!-- Birthdate -->
         <div class="input-field">
-          <label for="birthdate">Birthdate</label>
+          <label for="birthdate"
+            >Birthdate<span class="asterick">&#42;</span></label
+          >
           <input type="date" id="dob" name="birthDate" required />
         </div>
         <div class="input-field">
@@ -94,7 +124,9 @@
           />
         </div>
         <div class="input-field">
-          <label for="blood">Blood Group</label>
+          <label for="blood"
+            >Blood Group<span class="asterick">&#42;</span></label
+          >
           <input
             type="text"
             id="blood"
@@ -104,7 +136,7 @@
           />
         </div>
         <div class="input-field">
-          <label for="weight">Weight</label>
+          <label for="weight">Weight<span class="asterick">&#42;</span></label>
           <input
             type="text"
             id="weight"
@@ -116,7 +148,7 @@
       </div>
 
       <!-- Gender -->
-      <div class="title">Gender</div>
+      <div class="title">Gender<span class="asterick">&#42;</span></div>
       <div class="radios">
         <div class="input-radio">
           <input type="radio" id="male" value="Male" name="gender" />
@@ -134,19 +166,27 @@
       <div class="title">Contact information</div>
       <div class="contact">
         <div class="input-contact">
-          <label for="email">E-mail</label>
+          <label for="email">E-mail<span class="asterick">&#42;</span></label>
           <input
             type="email"
             id="email"
             placeholder="example@gmail.com"
             name="patientEmail"
+            required
           />
         </div>
         <div class="input-contact">
-          <label for="phone">Mobile no.</label>
+          <label for="phone"
+            >Mobile no.<span class="asterick">&#42;</span><span
+              class={isNumber ? "text-NotShown" : "text-Shown"}
+              >Please Enter Number</span
+            ></label
+          >
           <input
+            class={isNumber ? "number" : "not_number"}
             type="text"
             id="phone"
+            on:input={addInputListener}
             name="patientNumber"
             placeholder="+977"
             required
@@ -165,15 +205,17 @@
       <div class="title">Address</div>
       <div class="fields">
         <div class="input-field">
-          <label for="street">Street name</label>
+          <label for="street"
+            >Street name<span class="asterick">&#42;</span></label
+          >
           <input type="text" id="street" name="streetName" required />
         </div>
         <div class="input-field">
-          <label for="city">City</label>
+          <label for="city">City<span class="asterick">&#42;</span></label>
           <input type="text" id="city" name="cityName" required />
         </div>
         <div class="input-field">
-          <label for="state">State</label>
+          <label for="state">State<span class="asterick">&#42;</span></label>
           <input type="text" id="state" name="stateName" required />
         </div>
       </div>
@@ -193,6 +235,24 @@
     padding-left: 250px;
     justify-content: center;
     font-family: "Poppins", sans-serif;
+  }
+  .asterick {
+    color: red;
+    /* padding-left: 2rem; */
+  }
+  .text-NotShown {
+    display: none;
+  }
+  .text-Shown {
+    display: inline-block;
+    color: red;
+    font-size: 0.8rem;
+    font-family: "Poppins", sans-serif;
+    padding: 0 0.8rem;
+  }
+  .not_number {
+    background-color: #ffcccc;
+    transform: scale(1.02);
   }
   .container {
     position: relative;

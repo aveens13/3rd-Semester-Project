@@ -10,10 +10,22 @@ const patientSchema = new mongoose.Schema({
   birthDate: {
     type: Date,
   },
-  telecom: {
-    type: Array,
-    unique: true,
-  },
+  telecom: [
+    {
+      value: {
+        type: String,
+        unique: true,
+      },
+      use: String,
+      system: String,
+    },
+    {
+      value: {
+        unique: true,
+      },
+      system: String,
+    },
+  ],
   address: {
     type: Array,
   },

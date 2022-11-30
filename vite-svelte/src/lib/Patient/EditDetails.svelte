@@ -145,12 +145,13 @@
           />
         </div>
         <div class="input-contact">
-          <label for="tele">Telephone no.</label>
+          <label for="email">E-mail</label>
           <input
-            type="text"
-            id="tele"
-            name="patientTelephone"
-            placeholder="01- "
+            type="email"
+            id="email"
+            value={user.telecom[1].value}
+            placeholder="example@gmail.com"
+            name="patientEmail"
           />
         </div>
       </div>
