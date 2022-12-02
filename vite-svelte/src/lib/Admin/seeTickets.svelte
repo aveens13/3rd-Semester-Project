@@ -66,6 +66,7 @@
     inputValue = removeBold(name);
     filteredNames = [];
     hiLiteIndex = null;
+    //@ts-ignore
     document.querySelector("#name-input").focus();
   };
 

@@ -9,6 +9,7 @@
   import Patient from "./lib/Patient/Patient.svelte";
   import UserLogin from "./lib/UserLogin.svelte";
   import Waiting from "./lib/Waiting.svelte";
+  import ForgotPassword from "./lib/ForgotPassword.svelte";
   let state;
   let response;
   state = "waiting";
@@ -41,6 +42,8 @@
     <Page bind:state />
   {:else if state == "video"}
     <Video />
+  {:else if state == "forgotPassword"}
+    <ForgotPassword />
   {:else}
     <Login bind:state bind:response />
   {/if}

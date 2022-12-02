@@ -88,7 +88,6 @@
           active = false;
           click = "seeTickets";
         }, 1500);
-      } else {
       }
     });
   }
@@ -326,9 +325,11 @@
   }
   .toast {
     font-family: "Poppins", sans-serif;
-    position: absolute;
-    bottom: 25px;
+    position: relative;
+    top: 25px;
     right: 35px;
+    margin-left: 60rem;
+    margin-bottom: 3rem;
     border-radius: 1.2rem;
     background: #cbd3dd;
     padding: 20px 35px 20px 25px;
@@ -479,6 +480,8 @@
   .title {
     display: block;
     margin: 3px;
+    padding: 0.5rem;
+    border-radius: 1.8rem;
     background-color: #6d8baa;
     text-align: center;
   }

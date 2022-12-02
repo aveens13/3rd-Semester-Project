@@ -4,6 +4,28 @@
   export let user;
   export let active;
   export let patientState;
+  let isNumber = true;
+  let letterCount = 0;
+  let phoneNoValid = "";
+  function addInputListener(event) {
+    var number = /^[a-zA-Z]*$/;
+    if (event.data == null) {
+      letterCount -= 1;
+      console.log("Backspace");
+      isNumber = true;
+      // event.target.disabled = false;
+    } else if (event.data.match(number)) {
+      event.target.value = phoneNoValid;
+      letterCount = letterCount + 1;
+      console.log(event);
+      // event.target.value =
+      // event.target.disabled = true;
+      isNumber = false;
+    } else {
+      isNumber = true;
+    }
+    phoneNoValid = event.target.value;
+  }
   async function editDetails(event) {
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -134,10 +156,17 @@
       <div class="title">Contact information</div>
       <div class="contact">
         <div class="input-contact">
-          <label for="phone">Mobile no.</label>
+          <label for="phone"
+            >Mobile no.<span class="asterick">&#42;</span><span
+              class={isNumber ? "text-NotShown" : "text-Shown"}
+              >Please Enter Number</span
+            ></label
+          >
           <input
+            class={isNumber ? "number" : "not_number"}
             type="text"
             id="phone"
+            on:input={addInputListener}
             name="patientNumber"
             value={user.telecom[0].value}
             placeholder="+977"
@@ -210,6 +239,20 @@
     align-items: center;
     justify-content: center;
     font-family: "Poppins", sans-serif;
+  }
+  .text-NotShown {
+    display: none;
+  }
+  .text-Shown {
+    display: inline-block;
+    color: red;
+    font-size: 0.8rem;
+    font-family: "Poppins", sans-serif;
+    padding: 0 0.8rem;
+  }
+  .not_number {
+    background-color: #ffcccc;
+    transform: scale(1.02);
   }
   .container.active {
     margin-left: 275px;

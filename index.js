@@ -55,9 +55,11 @@ app.get("/api/docs", handlers.documentation);
 app.get("/api/deleteTicket/:ticketId", handlers.deleteTicket);
 app.get("/api/getticketNotifications/:patientId", handlers.notificationTicket);
 app.get("/api/getTicketIndividual/:userId", handlers.ticketIndividual);
-app.post("/api/editPatient/:patientId", registation.editPatient);
+app.get("/api/forgot-password/:email", registation.forgotPassword);
+app.get("/api/reset-password/:id/:token", registation.resetPassword);
 
 //Post API requests
+app.post("/api/editPatient/:patientId", registation.editPatient);
 app.post("/api/signin", authentication.signin);
 app.post("/api/create", ticket.create);
 app.post("/api/admin-login", authentication.adminLogin);

@@ -4,18 +4,29 @@
   export let patientState;
   export let responseNav;
   export let ticketActive;
+  import swal from "sweetalert";
   let name =
     responseNav.response.name[0].given[0] +
     " " +
     responseNav.response.name[0].family;
   console.log(name);
   function logoutSession() {
-    fetch("/api/logout").then((result) => {
-      result.json().then((e) => {
-        if (e.status == "logout") {
-          state = "login";
-        }
-      });
+    swal({
+      title: "Log Out",
+      text: "Are you sre you want to log out?",
+      icon: "warning",
+      //@ts-ignore
+      buttons: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch("/api/logout").then((result) => {
+          result.json().then((e) => {
+            if (e.status == "logout") {
+              state = "login";
+            }
+          });
+        });
+      }
     });
   }
 </script>

@@ -44,7 +44,7 @@
       <div class="first-box">
         <div class="history">
           <span>History</span>
-          <div class="history-bar">
+          <!-- <div class="history-bar">
             <div class="search">
               <label for="search" style="margin-right:1rem;">Search</label
               ><input
@@ -66,6 +66,45 @@
                 >
               </select>
             </div>
+          </div> -->
+          <div class="cards-history">
+            <div class="horizontal-card">
+              {#each ticketCreated as ticket}
+                <div class="hor-card" in:slide>
+                  <div class="left">
+                    <i class="las la-ticket-alt" in:fade />
+                    <div class="date" in:fade>
+                      {stringyfyDate(ticket.dateCreated)}
+                    </div>
+                    <div class="treatment">
+                      <div class="textLight">Treatment</div>
+                      <div class="textBold" in:fade>{ticket.type}</div>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div class="hospital">
+                      <div class="textLight">Hospital</div>
+                      <div class="textBold" in:fade>N/A</div>
+                    </div>
+                    <div class="nurse">
+                      <div class="textLight">Nurse</div>
+                      <div class="textBold" in:fade>N/A</div>
+                    </div>
+                    <div class="check">
+                      {#if ticket.completed}
+                        <div class="textLight" in:fade>
+                          <i class="chk las la-check" />Checked
+                        </div>
+                      {:else if !ticket.completed}
+                        <div class="textLight" in:fade>
+                          <i class="unchk las la-eye-slash" />Unchecked
+                        </div>
+                      {/if}
+                    </div>
+                  </div>
+                </div>
+              {/each}
+            </div>
           </div>
         </div>
         <div class="bottom-section">
@@ -84,7 +123,7 @@
                 <span>Temperature</span><i class="las la-thermometer" />
               </div>
               <div class="info">
-                <span>--</span>
+                <span>98.6</span>
                 <p>&#176;F</p>
               </div>
             </div>
@@ -118,7 +157,7 @@
               </div>
             </div>
           {/each}
-          {#each ticketCreated as ticket}
+          <!-- {#each ticketCreated as ticket}
             <div class="notification-banner">
               <div class="text-notification">
                 <i class="las la-ticket-alt" />
@@ -129,7 +168,7 @@
                 </p>
               </div>
             </div>
-          {/each}
+          {/each} -->
         </div>
       </div>
     </div>
@@ -204,6 +243,7 @@
   }
   .first-box {
     /* margin-top: 100px; */
+    padding-top: 3rem;
     display: flex;
     flex-direction: column;
     width: 65%;
@@ -273,7 +313,7 @@
   .history {
     display: flex;
     flex-direction: column;
-    min-height: 60%;
+    max-height: 40vh;
     text-align: center;
     border-radius: 25px;
     background-color: #ffffff;
@@ -281,6 +321,7 @@
   }
   .history span {
     font-weight: bolder !important;
+    margin-bottom: 3rem;
     font-size: 1.8rem !important;
   }
   .history-bar {
@@ -333,8 +374,15 @@
     transform: scale(1.5);
     transition: all 0.5s ease;
   }
-  .notification-banner .text-notification .la-ticket-alt {
+  .horizontal-card .hor-card .left .la-ticket-alt {
+    font-size: 1.5rem;
+    padding: 1rem;
     color: #41f1b6;
+  }
+  .horizontal-card .hor-card .left .date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .notification-banner .text-notification .la-stethoscope {
     color: #7d8da1;
@@ -362,5 +410,62 @@
   .history-sort label,
   select {
     margin-right: 0;
+  }
+  .cards-history {
+    height: 100%;
+    border-radius: 2%;
+    overflow-y: scroll;
+    min-height: 30vh;
+    max-height: 40vh;
+    background-color: #eff1f7;
+  }
+  .cards-history::-webkit-scrollbar {
+    display: none;
+  }
+  .cards-history .horizontal-card {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .cards-history .horizontal-card .hor-card {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 2rem;
+    margin: 1rem;
+    background-color: white;
+  }
+  .cards-history .horizontal-card .hor-card .left {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .cards-history .horizontal-card .hor-card .right {
+    justify-content: space-around;
+    width: 100%;
+    display: flex;
+  }
+  .hor-card .left .treatment {
+    display: flex;
+    flex-direction: column;
+  }
+  .textLight {
+    font-size: 0.8rem;
+    font-family: "Poppins", sans-serif;
+  }
+  .textBold {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    font-family: "Poppins", sans-serif;
+  }
+  .textLight i {
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem 0 0;
+  }
+  .check .la-check {
+    color: #41f1b6;
+  }
+  .check .la-eye-slash {
+    color: #f78ca9;
   }
 </style>

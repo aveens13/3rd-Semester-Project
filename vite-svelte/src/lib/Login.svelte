@@ -1,9 +1,11 @@
 <script>
   import Snackbar, { Label, Actions } from "@smui/snackbar";
+  import logo from "../assets/pl.jpg";
   import { flip } from "svelte/animate";
   import { fade } from "svelte/transition";
   import IconButton from "@smui/icon-button";
   import Button from "@smui/button";
+  import swal from "sweetalert";
   let snackbarError;
   let snackbarText = "";
   let changed;
@@ -59,6 +61,28 @@
       snackbarError.open();
     }
   }
+
+  async function forgotPassword() {
+    swal("Enter your email", {
+      //@ts-ignore
+      content: "input",
+    }).then((value) => {
+      fetch(`api/forgot-password/${value}`).then(async (resp) => {
+        const response = await resp.json();
+        if (resp.ok) {
+          swal({
+            title: response.message,
+            text: "Check your email to reset your password",
+            icon: "success",
+            //@ts-ignore
+            button: "Ok",
+          });
+        } else {
+          swal("Error", `${response.message}`, "error");
+        }
+      });
+    });
+  }
   console.log(data);
 </script>
 
@@ -70,6 +94,9 @@
 </Snackbar>
 
 <main>
+  <div class="logo">
+    <img src={logo} alt="Logo" />
+  </div>
   <div
     class={changed == "admin" ? "container right-panel-active" : "container"}
     id="container"
@@ -96,7 +123,7 @@
         <h1>Sign in</h1>
         <input type="email" placeholder="Email" name="myEmail" />
         <input type="password" placeholder="Password" name="myPassword" />
-        <a href="/">Forgot your password?</a>
+        <a href="#" on:click={forgotPassword}>Forgot your password?</a>
         <input type="submit" class="buttonsub" value="Signin" />
       </form>
     </div>
@@ -128,6 +155,23 @@
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+  .logo {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-left: 3rem;
+    margin-top: 3rem;
+    cursor: pointer;
+  }
+
+  .logo img {
+    width: 100px;
+    margin-right: 0.6rem;
+    margin-top: -0.6rem;
+  }
+  img {
+    width: 100%;
+  }
   h1 {
     font-weight: bold;
     margin: 0;

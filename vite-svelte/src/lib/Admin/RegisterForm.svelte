@@ -66,7 +66,9 @@
 
 <main>
   <div class="container" in:fade>
-    <header>Registration</header>
+    <header>
+      Fields marked with <span class="asterick">&#42;</span> should be filled.
+    </header>
     <form
       method="POST"
       action="/api/register-patient"
